@@ -1,0 +1,7 @@
+.searchBoxContainer {
+  display: flex;
+  width: 100vw;
+  height: max-content;
+  align-items: center;
+  justify-content: center;
+}
