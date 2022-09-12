@@ -5,3 +5,12 @@
   align-items: center;
   justify-content: center;
 }
+
+.tracksContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 600px;
+  height: max-content;
+}

@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
-import { searchSongs } from "../../services/QueryWordService";
 import styles from "./SearchBox.module.css";
+import { searchSongs } from "../../services/QueryWordService";
+import TrackItem from "../Tracks/TrackItem";
 
 const SearchBox = () => {
   const wordInputRef = useRef<HTMLInputElement>(null);
@@ -24,6 +25,7 @@ const SearchBox = () => {
         <input type="text" ref={wordInputRef} />
         <button>Search</button>
       </form>
+      <div className={styles.tracksContainer}></div>
     </div>
   );
 };
