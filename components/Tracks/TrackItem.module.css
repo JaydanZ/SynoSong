@@ -1,6 +1,70 @@
 .container {
-  display: flex;
   width: 100%;
   height: 150px;
+  padding: 4px;
+  background: linear-gradient(to left, #743ad5, #d53a9d);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.trackItem {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr 1fr 0.5fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  -webkit-box-shadow: inset 0px 0px 18px -6px #000000;
+  box-shadow: inset 0px 0px 18px -6px #000000;
   background-color: rgb(24, 24, 24);
+}
+
+.trackImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.nameAndArtistsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.nameAndArtistsContainer h1 {
+  font-size: 1rem;
+}
+
+.artistsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.artistsContainer h2 {
+  font-size: 0.7rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.albumName {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.albumName h2 {
+  font-size: 0.9rem;
+  font-weight: 300;
+  opacity: 0.8;
 }

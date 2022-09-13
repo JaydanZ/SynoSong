@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <h1>SynoSong</h1>
-      <h2>Discover new music using synonyms!</h2>
+      <h2>Discover new music using synonyms</h2>
       <SearchBox />
     </div>
   );
