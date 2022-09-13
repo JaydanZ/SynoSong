@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styles from "./SearchBox.module.css";
-import { searchSongs } from "../../services/QueryWordService";
+import { findSongs, findSpecificSong } from "../../services/FindSongsService";
 import TrackItem from "../Tracks/TrackItem";
 
 type tracksResponseType = {
@@ -14,15 +14,25 @@ const SearchBox = () => {
 
   const searchWordHandler = async (event: React.FormEvent) => {
     event.preventDefault();
+
     const wordInput: string | undefined = wordInputRef.current?.value;
     let tracksResponse: tracksResponseType[];
-    if (wordInput != null) {
-      const res = await searchSongs(wordInput);
-      tracksResponse = res.data;
-      console.log(tracksResponse);
 
+    if (wordInput != null) {
+      const res = await findSongs(wordInput);
+      tracksResponse = res.data;
+
+      console.log(tracksResponse);
       setTracks(tracksResponse);
     }
+  };
+
+  const trackInspectHandler = async (href: string) => {
+    if (href != null) {
+      const res = await findSpecificSong(href);
+      console.log(res);
+    }
+    return;
   };
   return (
     <div className={styles.searchBoxContainer}>
@@ -34,7 +44,16 @@ const SearchBox = () => {
         {tracksArr.length !== 0 &&
           tracksArr.map((entry) =>
             entry.tracks.map((track, index) => (
-              <TrackItem key={index} word={entry.key} track={track} />
+              <TrackItem
+                key={index}
+                word={entry.key}
+                trackName={track.name}
+                trackArtists={track.artists}
+                trackAlbumName={track.album.name}
+                trackAlbumImage={track.album.images[0].url}
+                trackHREF={track.href}
+                onTrackInspect={trackInspectHandler}
+              />
             ))
           )}
       </div>

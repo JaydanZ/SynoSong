@@ -1,44 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import type {
+  wordsResponse,
+  wordApiOptionsType,
+  spotifyTokenType,
+  songRequestType,
+  trackListObj,
+} from "../../models/types";
 import axios from "axios";
-
-// Types
-type Data = {
-  key: string;
-  tracks: any[];
-}[];
-
-type wordsResponse = {
-  word: string;
-  synonyms: string[];
-};
-
-type wordApiOptionsType = {
-  method: string;
-  url: string;
-  headers: {
-    "X-RapidAPI-Key": string;
-    "X-RapidAPI-Host": string;
-  };
-};
-
-type spotifyTokenType = {
-  method: string;
-  url: string;
-  headers: {
-    "Content-Type": string;
-    Authorization: string;
-  };
-  data: string;
-};
-
-type songRequestType = {
-  method: string;
-  url: string;
-  headers: {
-    "Content-Type": string;
-    Authorization: string;
-  };
-};
 
 // Spotify Credentials
 const CLIENT_ID: string = "f5320cc39bfc4127b45d2c0441abea20";
@@ -119,7 +87,7 @@ const requestTracks = async (wordInput: string) => {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data | any>
+  res: NextApiResponse<trackListObj | any>
 ) {
   try {
     if (req.method === "POST") {
@@ -156,7 +124,7 @@ export default async function handler(
       spotifyToken = tokenResult.data.access_token;
 
       // Request song data using synonyms
-      const responses: Data = await Promise.all(
+      const responses: trackListObj = await Promise.all(
         wordArray.map(async (word: string) => {
           // Send a request for each word
           const res = await requestTracks(word);
