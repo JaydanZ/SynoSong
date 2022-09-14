@@ -34,11 +34,11 @@ const requestAccessToken = async () => {
 
 // Spotify Request Tracks Handler
 // ====================================================================
-const requestTrackData = async (hrefInput: string) => {
+const requestTrackData = async (idInput: string) => {
   // Get songs using synonyms from wordsAPI
   const songRequestParams: songRequestType = {
     method: "GET",
-    url: hrefInput,
+    url: `https://api.spotify.com/v1/tracks/${idInput}`,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${spotifyToken}`,
@@ -58,7 +58,7 @@ export default async function handler(
   try {
     if (req.method === "POST") {
       // Extract data from request
-      const { href }: { href: string } = req.body;
+      const { id }: { id: string } = req.body;
 
       // Request access token from spotify API
       const tokenResult = await requestAccessToken();
@@ -66,8 +66,8 @@ export default async function handler(
       // Store token
       spotifyToken = tokenResult.data.access_token;
 
-      // Request track data using href
-      const trackResult = await requestTrackData(href);
+      // Request track data using ID
+      const trackResult = await requestTrackData(id);
 
       // Pull out track data
       const trackData: SpotifyApi.TrackObjectFull = trackResult.data;

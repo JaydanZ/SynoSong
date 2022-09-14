@@ -2,21 +2,17 @@ import React, { useRef, useState } from "react";
 import styles from "./SearchBox.module.css";
 import { findSongs, findSpecificSong } from "../../services/FindSongsService";
 import TrackItem from "../Tracks/TrackItem";
-
-type tracksResponseType = {
-  key: string;
-  tracks: SpotifyApi.TrackObjectFull[];
-};
+import type { trackListObj } from "../../models/types";
 
 const SearchBox = () => {
   const wordInputRef = useRef<HTMLInputElement>(null);
-  const [tracksArr, setTracks] = useState<tracksResponseType[]>([]);
+  const [tracksArr, setTracks] = useState<trackListObj>([]);
 
   const searchWordHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const wordInput: string | undefined = wordInputRef.current?.value;
-    let tracksResponse: tracksResponseType[];
+    let tracksResponse: trackListObj;
 
     if (wordInput != null) {
       const res = await findSongs(wordInput);
@@ -51,8 +47,7 @@ const SearchBox = () => {
                 trackArtists={track.artists}
                 trackAlbumName={track.album.name}
                 trackAlbumImage={track.album.images[0].url}
-                trackHREF={track.href}
-                onTrackInspect={trackInspectHandler}
+                trackID={track.id}
               />
             ))
           )}
