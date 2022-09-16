@@ -34,7 +34,7 @@ const requestAccessToken = async () => {
 
 // Spotify Request Tracks Handler
 // ====================================================================
-const requestTrackData = async (idInput: string) => {
+const requestTrackData = async (idInput: string[]) => {
   // Get songs using synonyms from wordsAPI
   const songRequestParams: songRequestType = {
     method: "GET",
@@ -58,7 +58,7 @@ export default async function handler(
   try {
     if (req.method === "POST") {
       // Extract data from request
-      const { id }: { id: string } = req.body;
+      const { id }: { id: string[] } = req.body;
 
       // Request access token from spotify API
       const tokenResult = await requestAccessToken();

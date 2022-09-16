@@ -49,4 +49,18 @@ export type trackListObj = {
   key: string;
   tracks: SpotifyApi.TrackObjectFull[];
 }[];
+
+export type apiError = {
+  error: string;
+};
+// ======================================================
+
+// CLIENT TYPES
+// ======================================================
+
+export type trackInspectType = {
+  token: string;
+  track: SpotifyApi.TrackObjectFull;
+};
+
 // ======================================================

@@ -14,7 +14,7 @@ export const findSongs = async (data: string) => {
   return response;
 };
 
-export const findSpecificSong = async (data: string) => {
+export const findSpecificSong = async (data: string | string[]) => {
   const options: songQueryType = {
     method: "POST",
     url: "/api/find-specific-song",

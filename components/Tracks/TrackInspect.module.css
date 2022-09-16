@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap");
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60vw;
+  height: 100vh;
+}
+
+.trackContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.trackImageContainer {
+}
+
+.trackInfoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.trackArtistsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.trackName,
+.trackAlbum,
+.trackArtists {
+  font-family: "Inter", sans-serif;
+}
+
+.trackName {
+  font-size: 3.5rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.trackAlbum {
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+.trackArtists {
+  font-size: 1.5rem;
+  font-weight: 300;
+}

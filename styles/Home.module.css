@@ -4,32 +4,10 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
   align-items: center;
-  overflow-x: hidden;
   font-family: "Inter", sans-serif;
-}
-
-.homeContainerHeader {
-  font-weight: 400;
-  font-size: 3rem;
-}
-
-.homeContainerSubHeader {
-  font-weight: 600;
-  font-size: 3rem;
-}
-
-.homeContainerSubHeader span {
-  font-weight: bold;
-  background-image: linear-gradient(45deg, #7f00ff, #e100ff);
-  background-size: 100%;
-  background-repeat: repeat;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-background-clip: text;
-  -moz-text-fill-color: transparent;
+  margin-top: 120px;
+  overflow-x: hidden;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,7 +16,7 @@
     border-color: #222;
   }
   .code {
-    background: #111;
+    background: #0f1212;
   }
   .logo img {
     filter: invert(1);

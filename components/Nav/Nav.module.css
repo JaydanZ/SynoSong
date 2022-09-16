@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap");
+
+.navContainer {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  backdrop-filter: saturate(180%) blur(5px);
+  backface-visibility: hidden;
+  border-bottom-style: solid;
+  border-bottom-width: 0.5px;
+  border-color: rgb(51, 51, 51);
+  z-index: +1;
+}
+
+.navItemsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw;
+  max-width: 1920px;
+  height: 100%;
+}
+
+.navLogoContainer {
+  margin-right: auto;
+}
+
+.navLogo {
+  font-family: "Inter", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+}
+
+.navLinksContainer {
+}
+
+.navLinks {
+  font-family: "Inter", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: rgb(161, 161, 161);
+}
