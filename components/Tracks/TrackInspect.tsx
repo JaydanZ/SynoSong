@@ -1,6 +1,6 @@
 import Image from "next/image";
+import TrackPlayer from "../TrackPlayer/TrackPlayer";
 import styles from "./TrackInspect.module.css";
-import ReactAudioPlayer from "react-audio-player";
 
 const TrackInspect: React.FC<{
   trackData: SpotifyApi.TrackObjectFull;
@@ -28,11 +28,10 @@ const TrackInspect: React.FC<{
           </div>
         </div>
       </div>
-      <ReactAudioPlayer
-        src={props.trackData.preview_url + ".mp3"}
-        controls={true}
-        volume={0.2}
-      />
+      {props.trackData.preview_url === null && <h1>No Preview Exists</h1>}
+      {props.trackData.preview_url !== null && (
+        <TrackPlayer trackURL={props.trackData.preview_url} />
+      )}
     </div>
   );
 };
