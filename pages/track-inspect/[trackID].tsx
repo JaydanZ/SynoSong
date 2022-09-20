@@ -5,9 +5,12 @@ import type { GetStaticProps, GetStaticPaths } from "next";
 import type { spotifyTokenType, songRequestType } from "../../models/types";
 import styles from "./TrackInspectPage.module.css";
 import TrackInspect from "../../components/Tracks/TrackInspect";
+import Vibrant from "node-vibrant";
 
 const TrackInspectPage: NextPage<{
   trackData: SpotifyApi.TrackObjectFull | undefined;
+  imagePalette: number[];
+  artistTopTracks: SpotifyApi.TrackObjectFull[];
 }> = (props) => {
   return (
     <div className={styles.container}>
@@ -18,7 +21,11 @@ const TrackInspectPage: NextPage<{
         </h1>
       )}
       {props.trackData !== undefined && (
-        <TrackInspect trackData={props.trackData} />
+        <TrackInspect
+          trackData={props.trackData}
+          imgPalette={props.imagePalette}
+          artistTopTracks={props.artistTopTracks}
+        />
       )}
     </div>
   );
@@ -37,10 +44,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
   // Pull track ID from URL
   const trackId = context.params!.trackID;
   let res: SpotifyApi.TrackObjectFull | undefined;
+  let paletteData: any;
+  let artistTopTracksList: SpotifyApi.TrackObjectFull[] | undefined;
 
   // Spotify Credentials
-  const CLIENT_ID: string = "f5320cc39bfc4127b45d2c0441abea20";
-  const CLIENT_SECRET: string = "25f00babfdfb49f88ab8e7c00640c214";
   let spotifyToken: string = "";
 
   // Spotify Access Token Request Handler
@@ -54,7 +61,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization:
           "Basic " +
-          Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
+          Buffer.from(
+            process.env.SPOTIFY_CLIENT_ID +
+              ":" +
+              process.env.SPOTIFY_CLIENT_SECRET
+          ).toString("base64"),
       },
       data: "grant_type=client_credentials",
     };
@@ -81,6 +92,23 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return songData;
   };
 
+  // Spotify Request Artist Top Tracks Handler
+  // ====================================================================
+  const requestArtistTopTracks = async (id: string) => {
+    const tracksRequestParams: songRequestType = {
+      method: "GET",
+      url: `https://api.spotify.com/v1/artists/${id}/top-tracks?market=CA`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${spotifyToken}`,
+      },
+    };
+
+    const tracksData = await axios(tracksRequestParams);
+    return tracksData;
+  };
+  // ====================================================================
+
   // Call spotify api and fetch track data
   if (trackId !== undefined) {
     // Request spotify access token
@@ -96,11 +124,24 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const trackData: SpotifyApi.TrackObjectFull = trackResult.data;
 
     res = trackData;
+
+    // Get image palette
+    paletteData = await Vibrant.from(res.album.images[0].url).getPalette();
+
+    // Get First Artist Top Tracks by ID
+    const artistID: string = res.artists[0].id;
+
+    // Request data
+    const artistTrackList = await requestArtistTopTracks(artistID);
+
+    artistTopTracksList = artistTrackList.data.tracks;
   }
 
   return {
     props: {
       trackData: res,
+      imagePalette: paletteData.Vibrant._rgb,
+      artistTopTracks: artistTopTracksList,
     },
   };
 };

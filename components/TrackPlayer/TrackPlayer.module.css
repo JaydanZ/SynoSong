@@ -3,22 +3,37 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 350px;
+  width: 500px;
   height: 60px;
   padding: 10px;
-  background: rgb(15, 15, 15);
+  background: rgb(11, 11, 11);
   border-radius: 10px;
+  box-shadow: rgba(7, 8, 8, 0.6) 0px 2px 4px 0px,
+    rgba(2, 2, 2, 0.6) 0px 2px 16px 0px;
 }
 
-.playerPlayPause {
+.volumeControls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.playerPlayPause,
+.playerMute {
   margin-right: auto;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.playerMute {
+  margin-right: 10px;
 }
 
 .currentTime,
@@ -37,10 +52,12 @@
   margin-left: 10px;
 }
 
-.progressBar {
+.progressBar,
+.volumeBar {
   --bar-bg: rgb(49, 49, 49);
   --bar-height: 8px;
   --seek-before-width: 0;
+  --seek-before-width-volume: 0;
   --seek-before-colour: rgb(72, 0, 187);
   --knob-clr: rgb(201, 201, 201);
   --selectedKnob: rgb(233, 233, 233);
@@ -49,13 +66,18 @@
   background: var(--bar-bg);
   border-radius: 10px;
   position: relative;
-  width: 100%;
+  width: 150px;
   height: var(--bar-height);
   outline: none;
 }
 
+.volumeBar {
+  width: 60px;
+}
+
 /* progress bar - safari */
-.progressBar::-webkit-slider-runnable-track {
+.progressBar::-webkit-slider-runnable-track,
+.volumeBar::-webkit-slider-runnable-track {
   background: var(--bar-bg);
   border-radius: 10px;
   position: relative;
@@ -65,7 +87,8 @@
 }
 
 /* progress bar - firefox */
-.progressBar::-moz-range-track {
+.progressBar::-moz-range-track,
+.volumeBar::-moz-range-track {
   background: var(--bar-bg);
   border-radius: 10px;
   position: relative;
@@ -74,12 +97,14 @@
   outline: none;
 }
 
-.progressBar::-moz-focus-outer {
+.progressBar::-moz-focus-outer,
+.volumeBar::-moz-focus-outer {
   border: 0;
 }
 
 /* progress bar - chrome and safari */
-.progressBar::before {
+.progressBar::before,
+.volumeBar::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -95,8 +120,13 @@
   cursor: pointer;
 }
 
+.volumeBar::before {
+  width: var(--seek-before-width-volume);
+}
+
 /* progress bar - firefox */
-.progressBar::-moz-range-progress {
+.progressBar::-moz-range-progress,
+.volumeBar::-moz-range-progress {
   background-color: var(--seek-before-colour);
   height: var(--bar-height);
   border-top-left-radius: 10px;
@@ -106,7 +136,8 @@
 }
 
 /* knob chrome and safari */
-.progressBar::-webkit-slider-thumb {
+.progressBar::-webkit-slider-thumb,
+.volumeBar::-webkit-slider-thumb {
   --webkit-appearance: none;
   appearance: none;
   height: 15px;
@@ -121,12 +152,14 @@
   box-sizing: border-box;
 }
 
-.progressBar:active::-webkit-slider-thumb {
+.progressBar:active::-webkit-slider-thumb,
+.volumeBar:active::-webkit-slider-thumb {
   background: var(--selectedKnob);
 }
 
 /* knob firefox */
-.progressBar::-moz-range-thumb {
+.progressBar::-moz-range-thumb,
+.volumeBar::-moz-range-thumb {
   height: 15px;
   width: 15px;
   border-radius: 50%;
@@ -138,6 +171,7 @@
   box-sizing: border-box;
 }
 
-.progressBar:active::-moz-range-thumb {
+.progressBar:active::-moz-range-thumb,
+.volumeBar:active::-moz-range-thumb {
   background: var(--selectedKnob);
 }

@@ -9,8 +9,6 @@ import type {
 import axios from "axios";
 
 // Spotify Credentials
-const CLIENT_ID: string = "f5320cc39bfc4127b45d2c0441abea20";
-const CLIENT_SECRET: string = "25f00babfdfb49f88ab8e7c00640c214";
 let spotifyToken: string = "";
 
 // Max word limit
@@ -56,7 +54,11 @@ const requestAccessToken = async () => {
       "Content-Type": "application/x-www-form-urlencoded",
       Authorization:
         "Basic " +
-        Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
+        Buffer.from(
+          process.env.SPOTIFY_CLIENT_ID +
+            ":" +
+            process.env.SPOTIFY_CLIENT_SECRET
+        ).toString("base64"),
     },
     data: "grant_type=client_credentials",
   };

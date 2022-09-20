@@ -1,29 +1,75 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap");
 
 .container {
+  --background-clr: 0, 0, 0;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 60vw;
+  justify-content: flex-start;
+  /* background: linear-gradient(rgb(var(--background-clr)), rgb(3, 3, 3) 50%); */
+
+  background: linear-gradient(rgb(35, 35, 35), rgb(12, 12, 12));
+  width: 100vw;
   height: 100vh;
+  overflow: visible;
 }
 
 .trackContainer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  width: 70vw;
+  height: 100vh;
+  margin-top: 150px;
+}
+
+.trackCarouselContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: rgb(12, 12, 12);
+  margin-top: 150px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.returnBtn {
+  margin-right: auto;
+  font-size: 3rem;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.trackDataContainer {
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
 }
 
 .trackImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: max-content;
+  width: max-content;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  margin-right: 10px;
 }
 
 .trackInfoContainer {
   display: flex;
+  height: 100%;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  margin-left: auto;
+  margin-bottom: auto;
 }
 
 .trackArtistsContainer {
@@ -31,6 +77,14 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+}
+
+.trackInfoLabels {
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-top: auto;
+  margin-bottom: 8px;
 }
 
 .trackName,
@@ -42,15 +96,35 @@
 .trackName {
   font-size: 3.5rem;
   font-weight: 500;
-  margin-bottom: 0;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .trackAlbum {
   font-size: 2.5rem;
   font-weight: 400;
+  margin-top: 0;
 }
 
 .trackArtists {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 300;
+  margin-top: 0;
+  margin-right: 15px;
+}
+
+.trackPreviewError {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: rgb(173, 173, 173);
+}
+
+.trackPlayerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: auto;
 }

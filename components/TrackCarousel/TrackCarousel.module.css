@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap");
+
+.embla {
+  position: relative;
+  max-width: 1250px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.topTracksLabel {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.emblaViewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.emblaPrev,
+.emblaNext {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 4rem;
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.emblaPrev:hover,
+.emblaNext:hover {
+  color: #8528e2;
+}
+
+.emblaPrev {
+  position: absolute;
+  top: 50%;
+  left: -6%;
+}
+
+.emblaNext {
+  position: absolute;
+  top: 50%;
+  right: -6%;
+}
+
+.emblaContainer {
+  display: flex;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* width: 100%;
+  height: 600px; */
+  /* background-color: #dadada; */
+}
+
+.emblaSlide {
+  flex: 0, 0, 230px;
+}

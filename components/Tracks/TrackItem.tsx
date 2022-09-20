@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import styles from "./TrackItem.module.css";
 import Image from "next/image";
 
 const TrackItem: React.FC<{
-  word: string;
+  word?: string | undefined;
   trackName: string;
   trackArtists: SpotifyApi.ArtistObjectSimplified[];
   trackAlbumName: string;
@@ -15,6 +16,7 @@ const TrackItem: React.FC<{
   const trackClickHandler = () => {
     router.push(`/track-inspect/${props.trackID}`);
   };
+
   return (
     <div className={styles.container} onClick={trackClickHandler}>
       <div className={styles.trackItem}>
@@ -22,22 +24,30 @@ const TrackItem: React.FC<{
           <Image
             src={props.trackAlbumImage}
             alt={props.trackName}
-            width="100px"
-            height="100px"
+            width="200px"
+            height="200px"
           />
         </div>
         <div className={styles.nameAndArtistsContainer}>
           <h1 className={styles.trackName}>{props.trackName}</h1>
           <div className={styles.artistsContainer}>
-            {props.trackArtists.map((artist, index) => (
+            <h2 className={styles.artistsContainerText}>
+              {props.trackArtists[0].name}
+            </h2>
+            {props.trackArtists.length > 1 && (
+              <h2 className={styles.artistsContainerText}>
+                {`, ${props.trackArtists[1].name}`}
+              </h2>
+            )}
+            {/* {props.trackArtists.map((artist, index) => (
               <h2 className={styles.artistsContainerText} key={index}>
                 {artist.name}
               </h2>
-            ))}
+            ))} */}
           </div>
-        </div>
-        <div className={styles.albumName}>
-          <h2 className={styles.albumNameText}>{props.trackAlbumName}</h2>
+          <div className={styles.albumName}>
+            <h2 className={styles.albumNameText}>{props.trackAlbumName}</h2>
+          </div>
         </div>
       </div>
     </div>
