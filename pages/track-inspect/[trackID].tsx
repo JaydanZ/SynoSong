@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import type { NextPage } from "next";
-import type { GetStaticProps, GetStaticPaths } from "next";
+import type { GetServerSideProps, GetStaticPaths } from "next";
 import type { spotifyTokenType, songRequestType } from "../../models/types";
 import styles from "./TrackInspectPage.module.css";
 import TrackInspect from "../../components/Tracks/TrackInspect";
@@ -33,14 +33,7 @@ const TrackInspectPage: NextPage<{
 
 export default TrackInspectPage;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    fallback: true,
-    paths: [],
-  };
-};
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   // Pull track ID from URL
   const trackId = context.params!.trackID;
   let res: SpotifyApi.TrackObjectFull | undefined;

@@ -17,8 +17,8 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
   const animationProgress = useRef<number>(0);
 
   const onLoadedMetadata = () => {
-    const seconds = Math.floor(audioPlayer.current!.duration);
-    const volume = Math.floor(audioPlayer.current!.volume * 100) / 2;
+    const seconds: number = Math.floor(audioPlayer.current!.duration);
+    const volume: number = 50;
 
     setDuration(seconds);
 
@@ -112,13 +112,17 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
     }
   };
 
+  useEffect(() => {
+    onLoadedMetadata();
+  }, []);
+
   return (
     <div className={styles.trackPlayer}>
       <audio
         ref={audioPlayer}
         src={props.trackURL}
         preload="metadata"
-        onLoadedMetadata={onLoadedMetadata}
+        //onLoadedMetadata={onLoadedMetadata}
       ></audio>
       <button className={styles.playerPlayPause} onClick={playPauseHandler}>
         {isPlaying ? <FaPause /> : <FaPlay />}
