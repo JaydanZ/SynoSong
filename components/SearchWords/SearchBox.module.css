@@ -7,16 +7,6 @@
   justify-content: center;
 }
 
-.tracksContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  width: 800px;
-  height: max-content;
-}
-
 .searchCTA {
   font-weight: 600;
   font-size: 3rem;

@@ -1,0 +1,9 @@
+.tracksContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 800px;
+  height: max-content;
+}

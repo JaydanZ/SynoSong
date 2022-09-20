@@ -58,9 +58,11 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
   };
 
   const whilePlaying = () => {
-    progressBar.current!.value = audioPlayer.current!.currentTime.toString();
-    changePlayerCurTime();
-    animationProgress.current = requestAnimationFrame(whilePlaying);
+    if (audioPlayer.current !== null && progressBar.current !== null) {
+      progressBar.current!.value = audioPlayer.current!.currentTime.toString();
+      changePlayerCurTime();
+      animationProgress.current = requestAnimationFrame(whilePlaying);
+    }
   };
 
   const changeRange = () => {
@@ -113,7 +115,9 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
   };
 
   useEffect(() => {
-    onLoadedMetadata();
+    if (duration === 0) {
+      onLoadedMetadata();
+    }
   }, []);
 
   return (
@@ -122,7 +126,7 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
         ref={audioPlayer}
         src={props.trackURL}
         preload="metadata"
-        //onLoadedMetadata={onLoadedMetadata}
+        onLoadedMetadata={onLoadedMetadata}
       ></audio>
       <button className={styles.playerPlayPause} onClick={playPauseHandler}>
         {isPlaying ? <FaPause /> : <FaPlay />}

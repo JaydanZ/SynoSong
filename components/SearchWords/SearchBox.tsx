@@ -4,7 +4,7 @@ import { insertList, selectTrackList } from "../../Store/trackListSlice";
 import { RootState } from "../../Store/store";
 import styles from "./SearchBox.module.css";
 import { findSongs, findSpecificSong } from "../../services/FindSongsService";
-import TrackItem from "../Tracks/TrackItem";
+import TrackList from "../TrackList/TrackList";
 import type { trackListObj } from "../../models/types";
 
 const SearchBox = () => {
@@ -31,18 +31,10 @@ const SearchBox = () => {
 
       console.log(tracksResponse);
       dispatch(insertList(tracksResponse));
-      //setTracks(tracksResponse);
+
       setCtaHeaderState(false);
     }
   };
-
-  // const trackInspectHandler = async (href: string) => {
-  //   if (href != null) {
-  //     const res = await findSpecificSong(href);
-  //     console.log(res);
-  //   }
-  //   return;
-  // };
 
   return (
     <div className={styles.searchBoxContainer}>
@@ -72,20 +64,7 @@ const SearchBox = () => {
         <button className={styles.searchBtn}>Search</button>
       </form>
       <div className={styles.tracksContainer}>
-        {trackList?.length !== 0 &&
-          trackList?.map((entry) =>
-            entry.tracks.map((track, index) => (
-              <TrackItem
-                key={index}
-                word={entry.key}
-                trackName={track.name}
-                trackArtists={track.artists}
-                trackAlbumName={track.album.name}
-                trackAlbumImage={track.album.images[0].url}
-                trackID={track.id}
-              />
-            ))
-          )}
+        {trackList?.length !== 0 && <TrackList tracks={trackList} />}
       </div>
     </div>
   );
