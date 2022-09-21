@@ -11,15 +11,29 @@ import type { trackListObj, trackListApiRes } from "../../models/types";
 const SearchBox = () => {
   const wordInputRef = useRef<HTMLInputElement>(null);
   const [searchError, setSearchError] = useState<boolean>(false);
+  const [searchErrorMsg, setSearchErrorMsg] = useState<string>("");
   const [searchState, setSearchState] = useState<boolean>(true);
   const trackList = useSelector(selectTrackList);
   const dispatch = useDispatch();
+
+  const validateApiResponse = (res: trackListApiRes) => {
+    setSearchErrorMsg("");
+    if (res.tracks !== undefined) {
+      const tracksResponse: trackListObj = res.tracks;
+
+      dispatch(insertList(tracksResponse));
+
+      setSearchState(false);
+    } else {
+      setSearchErrorMsg(res.error!);
+    }
+  };
 
   const searchWordHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const wordInput: string | undefined = wordInputRef.current?.value;
-    let apiResponse: trackListApiRes;
+
     setSearchError(false);
 
     if (wordInput != null) {
@@ -28,18 +42,8 @@ const SearchBox = () => {
         return;
       }
       const res = await findSongs(wordInput);
-      apiResponse = res;
 
-      if (apiResponse.tracks !== undefined) {
-        const tracksResponse: trackListObj = apiResponse.tracks;
-
-        console.log(tracksResponse);
-        dispatch(insertList(tracksResponse));
-
-        setSearchState(false);
-      } else {
-        console.log(apiResponse.error);
-      }
+      validateApiResponse(res);
     }
   };
 
@@ -52,17 +56,7 @@ const SearchBox = () => {
     // Generate synonyms from word and fetch songs from spotify API
     const tracks = await findSongs(randomWord.data[0]);
 
-    if (tracks.tracks !== undefined) {
-      console.log(tracks.tracks);
-      tracksRes = tracks.tracks;
-
-      // Store tracks list
-      dispatch(insertList(tracksRes));
-
-      setSearchState(false);
-    } else {
-      console.log(tracks.error);
-    }
+    validateApiResponse(tracks);
   };
 
   return (

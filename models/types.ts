@@ -21,8 +21,8 @@ export type randomWordRequestOptions = {
 };
 
 export type wordsResponse = {
-  word: string;
-  synonyms: string[];
+  word?: string;
+  synonyms?: string[];
 };
 
 export type wordApiOptionsType = {

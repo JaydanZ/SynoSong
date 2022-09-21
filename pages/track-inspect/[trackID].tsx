@@ -1,28 +1,34 @@
 import React from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import type { NextPage } from "next";
 import type { GetServerSideProps, GetStaticPaths } from "next";
-import type { spotifyTokenType, songRequestType } from "../../models/types";
+import type {
+  spotifyTokenType,
+  songRequestType,
+  trackListApiRes,
+} from "../../models/types";
 import styles from "./TrackInspectPage.module.css";
 import TrackInspect from "../../components/Tracks/TrackInspect";
 import Vibrant from "node-vibrant";
 
 const TrackInspectPage: NextPage<{
+  success: boolean;
   trackData: SpotifyApi.TrackObjectFull | undefined;
   imagePalette: number[];
   artistTopTracks: SpotifyApi.TrackObjectFull[];
+  errorMessage?: string;
 }> = (props) => {
   return (
     <div className={styles.container}>
-      {props.trackData === undefined && (
+      {props.success === false && (
         <h1 className={styles.errorText}>
           <span className={styles.errorTextSpan}>Error:</span> Track does not
           exist.
         </h1>
       )}
-      {props.trackData !== undefined && (
+      {props.success === true && (
         <TrackInspect
-          trackData={props.trackData}
+          trackData={props.trackData!}
           imgPalette={props.imagePalette}
           artistTopTracks={props.artistTopTracks}
         />
@@ -71,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // Spotify Request Tracks Handler
   // ====================================================================
   const requestTrackData = async (idInput: string[] | string) => {
-    // Get songs using synonyms from wordsAPI
+    // Get song data using track ID
     const songRequestParams: songRequestType = {
       method: "GET",
       url: `https://api.spotify.com/v1/tracks/${idInput}`,
@@ -103,38 +109,54 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // ====================================================================
 
   // Call spotify api and fetch track data
-  if (trackId !== undefined) {
-    // Request spotify access token
-    const tokenRes = await requestAccessToken();
+  try {
+    if (trackId !== undefined) {
+      // Request spotify access token
+      const tokenRes = await requestAccessToken();
 
-    // Store token
-    spotifyToken = tokenRes.data.access_token;
+      // Store token
+      spotifyToken = tokenRes.data.access_token;
 
-    // Request track data using ID
-    const trackResult = await requestTrackData(trackId);
+      // Request track data using ID
+      const trackResult = await requestTrackData(trackId);
 
-    // Pull out track data
-    const trackData: SpotifyApi.TrackObjectFull = trackResult.data;
+      // Pull out track data
+      const trackData: SpotifyApi.TrackObjectFull = trackResult.data;
 
-    res = trackData;
+      res = trackData;
 
-    // Get image palette
-    paletteData = await Vibrant.from(res.album.images[0].url).getPalette();
+      // Get image palette
+      paletteData = await Vibrant.from(res.album.images[0].url).getPalette();
 
-    // Get First Artist Top Tracks by ID
-    const artistID: string = res.artists[0].id;
+      // Get First Artist Top Tracks by ID
+      const artistID: string = res.artists[0].id;
 
-    // Request data
-    const artistTrackList = await requestArtistTopTracks(artistID);
+      // Request data
+      const artistTrackList = await requestArtistTopTracks(artistID);
 
-    artistTopTracksList = artistTrackList.data.tracks;
+      artistTopTracksList = artistTrackList.data.tracks;
+    }
+
+    return {
+      props: {
+        success: true,
+        trackData: res,
+        imagePalette: paletteData.Vibrant._rgb,
+        artistTopTracks: artistTopTracksList,
+      },
+    };
+  } catch (error) {
+    let errorMsg = "Unknown error";
+    if (error instanceof AxiosError) console.log(error.response?.data.message);
+
+    return {
+      props: {
+        success: false,
+        trackData: null,
+        imagePalette: null,
+        artistTopTracks: null,
+        errorMessage: errorMsg,
+      },
+    };
   }
-
-  return {
-    props: {
-      trackData: res,
-      imagePalette: paletteData.Vibrant._rgb,
-      artistTopTracks: artistTopTracksList,
-    },
-  };
 };

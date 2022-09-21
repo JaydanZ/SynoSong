@@ -7,7 +7,7 @@ import type {
   trackListObj,
   trackListApiRes,
 } from "../../models/types";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 // Spotify Credentials
 let spotifyToken: string = "";
@@ -39,7 +39,9 @@ const requestSynonyms = async (word: string) => {
   };
 
   // Extract synonyms from request
+
   const { data } = await axios.request(wordOptions);
+
   return data;
 };
 // ====================================================================
@@ -93,20 +95,25 @@ export default async function handler(
   res: NextApiResponse<trackListApiRes>
 ) {
   let trackResult: trackListApiRes;
+  let errorMsg: string = "";
   try {
     if (req.method === "POST") {
       // Extract word from request
       const { word }: { word: string } = req.body;
 
       // Request synonyms from wordsAPI
+      errorMsg = "Word not found";
       const wordsData: wordsResponse = await requestSynonyms(word);
 
       // Filter out all words containing spaces or dashes
-      const tempWordArray: string[] = wordsData.synonyms.filter(
-        (word: string) => {
+      errorMsg = "No synonyms for word exist";
+
+      let tempWordArray: string[] = [];
+      if (wordsData.synonyms!.length !== 0) {
+        tempWordArray = wordsData.synonyms!.filter((word: string) => {
           return !word.includes(" ") && !word.includes("-");
-        }
-      );
+        });
+      }
 
       // Randomize array for each call
       shuffleArray(tempWordArray);
@@ -122,12 +129,14 @@ export default async function handler(
       }
 
       // Request Spotify Access Token
+      errorMsg = "Spotify Token Request Error";
       const tokenResult = await requestAccessToken();
 
       // Store access token
       spotifyToken = tokenResult.data.access_token;
 
       // Request song data using synonyms
+      errorMsg = "Spotify Tracks Request Error";
       const trackRes: trackListObj = await Promise.all(
         wordArray.map(async (word: string) => {
           // Send a request for each word
@@ -147,16 +156,15 @@ export default async function handler(
 
       res.status(201).json(trackResult);
     }
-  } catch (error) {
-    let errorMessage = "Unknown Error";
+  } catch (error: AxiosError | unknown) {
+    // let errorMessage = "Unknown Error";
 
-    if (error instanceof Error) errorMessage = error.message;
-    else errorMessage = String(error);
+    if (error instanceof AxiosError) console.log(error.response?.data);
 
     trackResult = {
       success: false,
       tracks: undefined,
-      error: errorMessage,
+      error: errorMsg,
     };
     return res.status(404).json(trackResult);
   }
