@@ -5,6 +5,7 @@ import type {
   spotifyTokenType,
   songRequestType,
   trackListObj,
+  trackListApiRes,
 } from "../../models/types";
 import axios from "axios";
 
@@ -89,8 +90,9 @@ const requestTracks = async (wordInput: string) => {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<trackListObj | any>
+  res: NextApiResponse<trackListApiRes>
 ) {
+  let trackResult: trackListApiRes;
   try {
     if (req.method === "POST") {
       // Extract word from request
@@ -126,7 +128,7 @@ export default async function handler(
       spotifyToken = tokenResult.data.access_token;
 
       // Request song data using synonyms
-      const responses: trackListObj = await Promise.all(
+      const trackRes: trackListObj = await Promise.all(
         wordArray.map(async (word: string) => {
           // Send a request for each word
           const res = await requestTracks(word);
@@ -137,9 +139,25 @@ export default async function handler(
         })
       );
 
-      res.status(201).json(responses);
+      trackResult = {
+        success: true,
+        tracks: trackRes,
+        error: undefined,
+      };
+
+      res.status(201).json(trackResult);
     }
-  } catch (e) {
-    return res.status(404).json({ error: e });
+  } catch (error) {
+    let errorMessage = "Unknown Error";
+
+    if (error instanceof Error) errorMessage = error.message;
+    else errorMessage = String(error);
+
+    trackResult = {
+      success: false,
+      tracks: undefined,
+      error: errorMessage,
+    };
+    return res.status(404).json(trackResult);
   }
 }

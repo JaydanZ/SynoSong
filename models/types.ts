@@ -12,6 +12,14 @@ export type songQueryType = {
 
 // API TYPES
 // ======================================================
+export type randomWordRequestOptions = {
+  method: string;
+  url: string;
+  headers: {
+    "Content-Type": string;
+  };
+};
+
 export type wordsResponse = {
   word: string;
   synonyms: string[];
@@ -50,9 +58,12 @@ export type trackListObj = {
   tracks: SpotifyApi.TrackObjectFull[];
 }[];
 
-export type apiError = {
-  error: string;
+export type trackListApiRes = {
+  success: boolean;
+  tracks?: trackListObj;
+  error?: string;
 };
+
 // ======================================================
 
 // CLIENT TYPES

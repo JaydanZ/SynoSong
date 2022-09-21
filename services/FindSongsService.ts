@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { songQueryType } from "../models/types";
+import type { songQueryType, trackListApiRes } from "../models/types";
 
 export const findSongs = async (data: string) => {
   const options: songQueryType = {
@@ -11,7 +11,8 @@ export const findSongs = async (data: string) => {
     data: JSON.stringify({ word: data }),
   };
   const response = await axios(options);
-  return response;
+  const trackRes: trackListApiRes = response.data;
+  return trackRes;
 };
 
 export const findSpecificSong = async (data: string | string[]) => {

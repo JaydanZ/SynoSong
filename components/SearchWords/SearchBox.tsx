@@ -3,14 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { insertList, selectTrackList } from "../../Store/trackListSlice";
 import { RootState } from "../../Store/store";
 import styles from "./SearchBox.module.css";
-import { findSongs, findSpecificSong } from "../../services/FindSongsService";
+import { findSongs } from "../../services/FindSongsService";
 import TrackList from "../TrackList/TrackList";
-import type { trackListObj } from "../../models/types";
+import { generateWord } from "../../services/GenerateWordService";
+import type { trackListObj, trackListApiRes } from "../../models/types";
 
 const SearchBox = () => {
   const wordInputRef = useRef<HTMLInputElement>(null);
   const [searchError, setSearchError] = useState<boolean>(false);
-  const [ctaHeaderState, setCtaHeaderState] = useState<boolean>(true);
+  const [searchState, setSearchState] = useState<boolean>(true);
   const trackList = useSelector(selectTrackList);
   const dispatch = useDispatch();
 
@@ -18,7 +19,7 @@ const SearchBox = () => {
     event.preventDefault();
 
     const wordInput: string | undefined = wordInputRef.current?.value;
-    let tracksResponse: trackListObj;
+    let apiResponse: trackListApiRes;
     setSearchError(false);
 
     if (wordInput != null) {
@@ -27,18 +28,46 @@ const SearchBox = () => {
         return;
       }
       const res = await findSongs(wordInput);
-      tracksResponse = res.data;
+      apiResponse = res;
 
-      console.log(tracksResponse);
-      dispatch(insertList(tracksResponse));
+      if (apiResponse.tracks !== undefined) {
+        const tracksResponse: trackListObj = apiResponse.tracks;
 
-      setCtaHeaderState(false);
+        console.log(tracksResponse);
+        dispatch(insertList(tracksResponse));
+
+        setSearchState(false);
+      } else {
+        console.log(apiResponse.error);
+      }
+    }
+  };
+
+  const generateWordHandler = async () => {
+    let tracksRes: trackListObj;
+
+    // Fetch random word from API
+    const randomWord = await generateWord();
+
+    // Generate synonyms from word and fetch songs from spotify API
+    const tracks = await findSongs(randomWord.data[0]);
+
+    if (tracks.tracks !== undefined) {
+      console.log(tracks.tracks);
+      tracksRes = tracks.tracks;
+
+      // Store tracks list
+      dispatch(insertList(tracksRes));
+
+      setSearchState(false);
+    } else {
+      console.log(tracks.error);
     }
   };
 
   return (
     <div className={styles.searchBoxContainer}>
-      {ctaHeaderState === true && (
+      {searchState === true && (
         <React.Fragment>
           {" "}
           <h2 className={styles.searchCTA}>
@@ -49,11 +78,6 @@ const SearchBox = () => {
           </h3>
         </React.Fragment>
       )}
-      {searchError === true && (
-        <h1 className={styles.searchError}>
-          Error: Input cannot contain numbers or special characters.
-        </h1>
-      )}
       <form onSubmit={searchWordHandler} className={styles.searchForm}>
         <input
           type="text"
@@ -63,6 +87,15 @@ const SearchBox = () => {
         />
         <button className={styles.searchBtn}>Search</button>
       </form>
+      <h1 className={styles.generateWordHeader}>Or</h1>
+      <button className={styles.generateWordBtn} onClick={generateWordHandler}>
+        Generate Random Word
+      </button>
+      {searchError === true && (
+        <h1 className={styles.searchError}>
+          Error: Input cannot contain numbers or special characters.
+        </h1>
+      )}
       <div className={styles.tracksContainer}>
         {trackList?.length !== 0 && <TrackList tracks={trackList} />}
       </div>
