@@ -40,6 +40,8 @@
 }
 
 .navLinksContainer {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .navLinks {
@@ -47,4 +49,48 @@
   font-size: 1.5rem;
   font-weight: 300;
   color: rgb(161, 161, 161);
+}
+
+.authLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+.navLoginState {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.navProfileIcon {
+  color: rgb(100, 100, 100);
+  font-size: 1.1rem;
+  margin-right: 10px;
+}
+
+.navUsername {
+  font-family: "Inter", sans-serif;
+  color: rgb(100, 100, 100);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-right: 20px;
+}
+
+.loginBtn {
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }

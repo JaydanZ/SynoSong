@@ -1,4 +1,4 @@
-import type { trackListObj } from "../../models/types";
+import type { trackListObj } from "../../types/types";
 import TrackItem from "../Tracks/TrackItem";
 import styles from "./TrackList.module.css";
 

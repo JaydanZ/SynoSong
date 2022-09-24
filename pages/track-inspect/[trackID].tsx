@@ -6,7 +6,7 @@ import type {
   spotifyTokenType,
   songRequestType,
   trackListApiRes,
-} from "../../models/types";
+} from "../../types/types";
 import styles from "./TrackInspectPage.module.css";
 import TrackInspect from "../../components/Tracks/TrackInspect";
 import Vibrant from "node-vibrant";

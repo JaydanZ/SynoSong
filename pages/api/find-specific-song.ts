@@ -3,7 +3,7 @@ import type {
   spotifyTokenType,
   trackListObj,
   songRequestType,
-} from "../../models/types";
+} from "../../types/types";
 import axios from "axios";
 
 // Spotify Credentials

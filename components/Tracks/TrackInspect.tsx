@@ -24,7 +24,9 @@ const TrackInspect: React.FC<{
     <div className={styles.container} ref={containerRef}>
       <div className={styles.trackContainer}>
         <Link href="/">
-          <FaArrowCircleLeft className={styles.returnBtn} />
+          <a className={styles.returnBtn}>
+            <FaArrowCircleLeft />
+          </a>
         </Link>
         <div className={styles.trackDataContainer}>
           <div className={styles.trackImageContainer}>

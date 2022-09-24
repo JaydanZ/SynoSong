@@ -12,15 +12,18 @@
     "@reduxjs/toolkit": "^1.8.5",
     "@types/react-slick": "^0.23.10",
     "@types/spotify-api": "^0.0.17",
+    "@types/spotify-web-api-node": "^5.0.7",
     "axios": "^0.27.2",
     "embla-carousel-react": "^7.0.3",
     "framer-motion": "^7.3.4",
     "next": "12.2.5",
+    "next-auth": "^4.10.3",
     "node-vibrant": "^3.2.1-alpha.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
-    "react-redux": "^8.0.2"
+    "react-redux": "^8.0.2",
+    "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
     "@types/node": "18.7.15",

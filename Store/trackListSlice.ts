@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { trackListObj } from "../models/types";
+import type { trackListObj } from "../types/types";
 import { RootState } from "./store";
 
 export interface trackListState {

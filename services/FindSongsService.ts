@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import type { songQueryType, trackListApiRes } from "../models/types";
+import type { songQueryType, trackListApiRes } from "../types/types";
 
 export const findSongs = async (data: string) => {
   const options: songQueryType = {

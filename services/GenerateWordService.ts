@@ -1,5 +1,5 @@
 import axios from "axios";
-import { randomWordRequestOptions } from "../models/types";
+import { randomWordRequestOptions } from "../types/types";
 
 export const generateWord = async () => {
   const options: randomWordRequestOptions = {

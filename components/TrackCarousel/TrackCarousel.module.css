@@ -3,6 +3,7 @@
 .embla {
   position: relative;
   max-width: 1250px;
+  width: 80vw;
   margin-right: auto;
   margin-left: auto;
 }

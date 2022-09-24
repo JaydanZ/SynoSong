@@ -6,7 +6,7 @@ import type {
   songRequestType,
   trackListObj,
   trackListApiRes,
-} from "../../models/types";
+} from "../../types/types";
 import axios, { AxiosError } from "axios";
 
 // Spotify Credentials

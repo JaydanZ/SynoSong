@@ -6,7 +6,7 @@ import styles from "./SearchBox.module.css";
 import { findSongs } from "../../services/FindSongsService";
 import TrackList from "../TrackList/TrackList";
 import { generateWord } from "../../services/GenerateWordService";
-import type { trackListObj, trackListApiRes } from "../../models/types";
+import type { trackListObj, trackListApiRes } from "../../types/types";
 
 const SearchBox = () => {
   const wordInputRef = useRef<HTMLInputElement>(null);
