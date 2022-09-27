@@ -40,15 +40,19 @@
 }
 
 .navLinksContainer {
+  display: flex;
+  flex-direction: row;
   margin-right: auto;
   margin-left: auto;
 }
 
 .navLinks {
   font-family: "Inter", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 300;
   color: rgb(161, 161, 161);
+  margin: 10px;
+  cursor: pointer;
 }
 
 .authLinks {

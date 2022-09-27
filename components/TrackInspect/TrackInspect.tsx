@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useSelector, useDispatch } from "react-redux";
+import { add, remove, selectPlaylist } from "../../Store/playlistSlice";
+import SpotifyPlayer from "react-spotify-web-playback";
 import TrackPlayer from "../TrackPlayer/TrackPlayer";
 import TrackCarousel from "../TrackCarousel/TrackCarousel";
 import { FaArrowCircleLeft } from "react-icons/fa";
@@ -11,8 +15,16 @@ const TrackInspect: React.FC<{
   imgPalette: number[];
   artistTopTracks: SpotifyApi.TrackObjectFull[] | undefined;
 }> = (props) => {
+  const [isSessionValid, setSession] = useState<boolean>(false);
+
+  const curPlaylist = useSelector(selectPlaylist);
+  const dispatch = useDispatch();
+
   // Refs
   let containerRef = useRef<HTMLDivElement>(null);
+
+  // Grab current session
+  const { data: session } = useSession();
 
   const generateGradient = () => {
     containerRef.current!.style.setProperty(
@@ -20,6 +32,30 @@ const TrackInspect: React.FC<{
       `${props.imgPalette[0]},${props.imgPalette[1]},${props.imgPalette[2]}`
     );
   };
+
+  const addToPlaylist = () => {
+    dispatch(
+      add({
+        name: props.trackData.name,
+        album: props.trackData.album.name,
+        albumCover: props.trackData.album.images[0].url,
+        artists: props.trackData.artists,
+        id: props.trackData.id,
+      })
+    );
+  };
+
+  const removeFromPlaylist = () => {
+    dispatch(remove(props.trackData.id));
+  };
+
+  useEffect(() => {
+    if (session) {
+      setSession(true);
+    } else {
+      setSession(false);
+    }
+  }, [session]);
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.trackContainer}>
@@ -51,15 +87,43 @@ const TrackInspect: React.FC<{
               ))}
             </div>
             <div className={styles.trackPlayerContainer}>
-              {props.trackData.preview_url === null && (
-                <h1 className={styles.trackPreviewError}>No Preview Exists</h1>
+              {isSessionValid === true && (
+                <SpotifyPlayer
+                  token={session!.user.accessToken}
+                  uris={[props.trackData.uri]}
+                />
               )}
-              {props.trackData.preview_url !== null && (
-                <TrackPlayer trackURL={props.trackData.preview_url} />
-              )}
+              {props.trackData.preview_url === null &&
+                isSessionValid === false && (
+                  <h1 className={styles.trackPreviewError}>
+                    No Preview Exists
+                  </h1>
+                )}
+              {props.trackData.preview_url !== null &&
+                isSessionValid === false && (
+                  <TrackPlayer trackURL={props.trackData.preview_url} />
+                )}
             </div>
           </div>
         </div>
+        {curPlaylist !== undefined &&
+        curPlaylist.length !== 0 &&
+        curPlaylist?.filter((track) => track.id === props.trackData.id)
+          .length !== 0 ? (
+          <button
+            className={styles.toggleFromPlaylistBtn}
+            onClick={removeFromPlaylist}
+          >
+            Remove From Playlist
+          </button>
+        ) : (
+          <button
+            className={styles.toggleFromPlaylistBtn}
+            onClick={addToPlaylist}
+          >
+            Add To Playlist
+          </button>
+        )}
       </div>
       <div className={styles.trackCarouselContainer}>
         <TrackCarousel trackList={props.artistTopTracks} />

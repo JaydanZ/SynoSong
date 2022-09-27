@@ -5,7 +5,7 @@ import { IoPerson } from "react-icons/io5";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
-  console.log(session);
+
   return (
     <nav className={styles.navContainer}>
       <div className={styles.navItemsContainer}>
@@ -16,6 +16,9 @@ const Navbar = () => {
         </div>
         <div className={styles.navLinksContainer}>
           <h1 className={styles.navLinks}>About</h1>
+          <Link href="/my-playlist">
+            <h1 className={styles.navLinks}>My Playlist</h1>
+          </Link>
         </div>
         <div className={styles.authLinks}>
           {session !== null && (

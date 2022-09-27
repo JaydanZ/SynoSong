@@ -8,7 +8,7 @@ import type {
   trackListApiRes,
 } from "../../types/types";
 import styles from "./TrackInspectPage.module.css";
-import TrackInspect from "../../components/Tracks/TrackInspect";
+import TrackInspect from "../../components/TrackInspect/TrackInspect";
 import Vibrant from "node-vibrant";
 
 const TrackInspectPage: NextPage<{

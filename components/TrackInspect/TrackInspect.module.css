@@ -128,3 +128,31 @@
   width: 100%;
   margin-top: auto;
 }
+
+.toggleFromPlaylistBtn {
+  position: relative;
+  top: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  background-color: rgb(10, 10, 10);
+  color: white;
+  border-radius: 10px;
+  width: max-content;
+  height: max-content;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: auto;
+  margin-top: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.toggleFromPlaylistBtn:hover {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  top: 5px;
+}

@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { insertList, selectTrackList } from "../../Store/trackListSlice";
-import { RootState } from "../../Store/store";
 import styles from "./SearchBox.module.css";
 import { findSongs } from "../../services/FindSongsService";
 import TrackList from "../TrackList/TrackList";

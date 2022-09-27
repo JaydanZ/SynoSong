@@ -74,4 +74,12 @@ export type trackInspectType = {
   track: SpotifyApi.TrackObjectFull;
 };
 
+export type playlistItem = {
+  name: string;
+  album: string;
+  albumCover: string;
+  artists: SpotifyApi.ArtistObjectSimplified[];
+  id: string;
+};
+
 // ======================================================
