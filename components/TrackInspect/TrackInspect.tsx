@@ -41,6 +41,7 @@ const TrackInspect: React.FC<{
         albumCover: props.trackData.album.images[0].url,
         artists: props.trackData.artists,
         id: props.trackData.id,
+        uri: props.trackData.uri,
       })
     );
   };

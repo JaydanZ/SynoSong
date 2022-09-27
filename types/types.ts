@@ -64,6 +64,11 @@ export type trackListApiRes = {
   error?: string;
 };
 
+export type importPlaylistRes = {
+  success: boolean;
+  message: string;
+};
+
 // ======================================================
 
 // CLIENT TYPES
@@ -80,6 +85,7 @@ export type playlistItem = {
   albumCover: string;
   artists: SpotifyApi.ArtistObjectSimplified[];
   id: string;
+  uri: string;
 };
 
 // ======================================================

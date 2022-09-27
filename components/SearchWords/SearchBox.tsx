@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { insertList, selectTrackList } from "../../Store/trackListSlice";
 import styles from "./SearchBox.module.css";
-import { findSongs } from "../../services/FindSongsService";
+import { findSongs } from "../../services/FindSongs";
 import TrackList from "../TrackList/TrackList";
-import { generateWord } from "../../services/GenerateWordService";
+import { generateWord } from "../../services/GenerateWord";
 import type { trackListObj, trackListApiRes } from "../../types/types";
 
 const SearchBox = () => {

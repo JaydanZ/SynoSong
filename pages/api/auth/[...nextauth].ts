@@ -42,9 +42,6 @@ export default NextAuth({
     async jwt({ token, account, user }) {
       try {
         // Initial sign in
-        // console.log(token);
-        // console.log(account);
-        // console.log(user);
 
         console.log("checking sign in...");
 

@@ -25,3 +25,20 @@
   font-size: 2.5rem;
   color: white;
 }
+
+.importBtn {
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  width: max-content;
+  height: max-content;
+  padding: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-top: 20px;
+  background-color: rgb(5, 5, 5);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
