@@ -4,11 +4,11 @@ import type { trackListObj } from "../types/types";
 import { RootState } from "./store";
 
 export interface trackListState {
-  list: trackListObj | undefined;
+  list: trackListObj;
 }
 
 const initialState: trackListState = {
-  list: undefined,
+  list: [],
 };
 
 export const trackListSlice = createSlice({

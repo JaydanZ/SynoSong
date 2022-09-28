@@ -5,8 +5,8 @@
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  height: 100vh;
-  background-color: rgb(17, 17, 17);
+  height: 100%;
+  background-color: #0e0e0e;
 }
 
 .playlistContainer {
@@ -19,7 +19,8 @@
   margin-top: 100px;
 }
 
-.playlistHeader {
+.playlistHeader,
+.importHeader {
   font-family: "Inter", sans-serif;
   font-weight: bold;
   font-size: 2.5rem;
@@ -41,4 +42,69 @@
   color: white;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.importHeaderContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.closeImportFormBtn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  margin-left: auto;
+  margin-bottom: auto;
+}
+
+.importForm {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(24, 24, 24);
+  padding: 20px;
+  border-radius: 10px;
+  width: 600px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.importHeader {
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+
+.importNameField {
+  border: none;
+  background: none;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 200px;
+  height: 40px;
+  padding: 10px;
+  margin: 10px;
+  margin-left: 0;
+  border-color: rgb(125, 89, 172);
+  background-color: rgba(125, 89, 172, 0.192);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.importNameField:focus {
+  outline: none !important;
+  border-color: rgb(91, 3, 206);
+}
+
+.importError {
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  color: rgb(224, 97, 97);
 }

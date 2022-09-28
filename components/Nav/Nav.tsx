@@ -15,10 +15,13 @@ const Navbar = () => {
           </Link>
         </div>
         <div className={styles.navLinksContainer}>
-          <h1 className={styles.navLinks}>About</h1>
+          <Link href="/">
+            <h1 className={styles.navLinks}>Home</h1>
+          </Link>
           <Link href="/my-playlist">
             <h1 className={styles.navLinks}>My Playlist</h1>
           </Link>
+          <h1 className={styles.navLinks}>About</h1>
         </div>
         <div className={styles.authLinks}>
           {session !== null && (

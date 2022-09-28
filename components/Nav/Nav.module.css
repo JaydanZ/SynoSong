@@ -53,6 +53,12 @@
   color: rgb(161, 161, 161);
   margin: 10px;
   cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.navLinks:hover,
+.navLinks:focus {
+  color: rgb(236, 236, 236);
 }
 
 .authLinks {

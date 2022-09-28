@@ -92,6 +92,14 @@ const TrackInspect: React.FC<{
                 <SpotifyPlayer
                   token={session!.user.accessToken}
                   uris={[props.trackData.uri]}
+                  styles={{
+                    bgColor: "#0b0b0b",
+                    color: "#ffffff",
+                    sliderHandleColor: "#ffffff",
+                    trackNameColor: "#ffffff",
+                    sliderColor: "#4800bb",
+                    trackArtistColor: "#bfbfbf",
+                  }}
                 />
               )}
               {props.trackData.preview_url === null &&

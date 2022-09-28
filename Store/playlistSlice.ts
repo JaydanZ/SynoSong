@@ -4,11 +4,11 @@ import { RootState } from "./store";
 import { playlistItem } from "../types/types";
 
 export interface playlistState {
-  playlist: playlistItem[] | undefined;
+  playlist: playlistItem[];
 }
 
 const initialState: playlistState = {
-  playlist: undefined,
+  playlist: [],
 };
 
 export const playlistSlice = createSlice({
