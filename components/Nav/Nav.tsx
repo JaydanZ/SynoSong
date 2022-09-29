@@ -1,10 +1,20 @@
 import styles from "./Nav.module.css";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { IoPerson } from "react-icons/io5";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [isLoggedIn, setLoginState] = useState<boolean>(false);
   const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (session?.error === "RefreshAccessTokenError" || session === null) {
+      setLoginState(false);
+    } else {
+      setLoginState(true);
+    }
+  }, [session]);
 
   return (
     <nav className={styles.navContainer}>
@@ -24,7 +34,7 @@ const Navbar = () => {
           <h1 className={styles.navLinks}>About</h1>
         </div>
         <div className={styles.authLinks}>
-          {session !== null && (
+          {isLoggedIn === true && (
             <div className={styles.navLoginState}>
               <IoPerson className={styles.navProfileIcon} />
               <h1 className={styles.navUsername}>{session?.user?.name}</h1>
@@ -34,7 +44,7 @@ const Navbar = () => {
             </div>
           )}
 
-          {session === null && (
+          {isLoggedIn === false && (
             <Link href="/login">
               <button className={styles.loginBtn}>Log Into Spotify</button>
             </Link>

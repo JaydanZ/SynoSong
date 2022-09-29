@@ -57,6 +57,7 @@ const TrackInspect: React.FC<{
       setSession(false);
     }
   }, [session]);
+
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.trackContainer}>

@@ -16,5 +16,7 @@ declare module "next-auth" {
       refreshToken: string;
       username: string;
     };
+
+    error?: string;
   }
 }

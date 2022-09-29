@@ -27,8 +27,8 @@ const PlaylistTrackItem: React.FC<{
         <Image
           src={props.albumCover}
           alt={props.name}
-          width="60px"
-          height="60px"
+          width="40px"
+          height="40px"
         />
       </div>
 

@@ -65,21 +65,26 @@ const Playlist: React.FC<{}> = () => {
     <div className={styles.container}>
       <div className={styles.playlistContainer}>
         <h1 className={styles.playlistHeader}>My Playlist</h1>
-        {playlist !== undefined &&
-          playlist.length !== 0 &&
-          playlist.map((track) => (
-            <PlaylistTrackItem
-              key={track.id}
-              id={track.id}
-              name={track.name}
-              album={track.album}
-              albumCover={track.albumCover}
-              artists={track.artists}
-              onRemoveTrack={removeTrackHandler}
-            />
-          ))}
+        <div className={styles.playlistContent}>
+          {playlist !== undefined &&
+            playlist.length !== 0 &&
+            playlist.map((track) => (
+              <PlaylistTrackItem
+                key={track.id}
+                id={track.id}
+                name={track.name}
+                album={track.album}
+                albumCover={track.albumCover}
+                artists={track.artists}
+                onRemoveTrack={removeTrackHandler}
+              />
+            ))}
+        </div>
         {!isImporting && (
-          <button className={styles.importBtn} onClick={toggleImportState}>
+          <button
+            className={styles.openImportFormBtn}
+            onClick={toggleImportState}
+          >
             Import to Spotify
           </button>
         )}
