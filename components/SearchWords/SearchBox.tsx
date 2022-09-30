@@ -5,6 +5,7 @@ import styles from "./SearchBox.module.css";
 import { findSongs } from "../../services/FindSongs";
 import TrackList from "../TrackList/TrackList";
 import { generateWord } from "../../services/GenerateWord";
+import { toast } from "react-toastify";
 import type { trackListObj, trackListApiRes } from "../../types/types";
 
 const SearchBox = () => {
@@ -21,9 +22,27 @@ const SearchBox = () => {
       const tracksResponse: trackListObj = res.tracks;
 
       dispatch(insertList(tracksResponse));
-
       setSearchState(false);
+
+      toast.success("Tracks Loaded!", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else {
+      toast.error(res.error!.toString(), {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       setSearchErrorMsg(res.error!);
     }
   };

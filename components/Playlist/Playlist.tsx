@@ -15,45 +15,65 @@ const Playlist: React.FC<{}> = () => {
 
   const { data: session } = useSession();
 
-  console.log(session);
-
   const playlist = useSelector(selectPlaylist);
   const dispatch = useDispatch();
 
   const removeTrackHandler = (id: string) => {
     dispatch(remove(id));
-  };
-
-  const importPlaylist = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setImportError(false);
-    // Import playlist into spotify account
-    // We must first create a playlist on spotify
-
-    if (playlistName?.current?.value.length === 0) {
-      setImportError(true);
-      return;
-    }
-
-    const tracks = playlist?.map((track) => {
-      return track.uri;
-    });
-
-    const res = await importPlaylistHandler(
-      playlistName!.current!.value,
-      session!.user.name,
-      tracks!
-    );
-
-    toast.success("Playlist imported successfully!", {
+    toast.error("Track removed.", {
       position: "bottom-center",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
     });
+  };
+
+  const importPlaylist = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setImportError(false);
+
+    try {
+      if (playlistName?.current?.value.length === 0) {
+        setImportError(true);
+        return;
+      }
+
+      const tracks = playlist?.map((track) => {
+        return track.uri;
+      });
+
+      const res = await importPlaylistHandler(
+        playlistName!.current!.value,
+        session!.user.name,
+        tracks!
+      );
+
+      toast.success("Playlist imported successfully!", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      setImportError(true);
+      toast.error("ERROR: An unknown error has occurred...", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    // Import playlist into spotify account
+    // We must first create a playlist on spotify
   };
 
   const toggleImportState = () => {
@@ -80,14 +100,29 @@ const Playlist: React.FC<{}> = () => {
               />
             ))}
         </div>
-        {!isImporting && (
-          <button
-            className={styles.openImportFormBtn}
-            onClick={toggleImportState}
-          >
-            Import to Spotify
-          </button>
+        {session === null && playlist.length !== 0 && (
+          <h1 className={styles.importLoginNeeded}>
+            Login with your spotify account to import your playlist!
+          </h1>
         )}
+
+        {playlist.length === 0 && (
+          <h1 className={styles.importPlaylistNeeded}>
+            Add more songs to your playlist to import!
+          </h1>
+        )}
+
+        {!isImporting &&
+          session !== null &&
+          session?.error !== "RefreshAccessTokenError" &&
+          playlist.length !== 0 && (
+            <button
+              className={styles.openImportFormBtn}
+              onClick={toggleImportState}
+            >
+              Import to Spotify
+            </button>
+          )}
 
         {isImporting && (
           <form onSubmit={importPlaylist} className={styles.importForm}>

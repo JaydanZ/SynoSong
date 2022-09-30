@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import storage from "./storage";
+import storageSession from "reduxjs-toolkit-persist/lib/storage/session";
 import { combineReducers } from "redux";
 import {
   persistReducer,
@@ -10,13 +10,14 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import thunk from "redux-thunk";
 import trackListReducer from "./trackListSlice";
 import playlistReducer from "./playlistSlice";
 
 const persistConfig = {
   timeout: 100,
   key: "playlist",
-  storage,
+  storage: storageSession,
 };
 
 const combinedReducer = combineReducers({
@@ -27,12 +28,7 @@ const persistedReducer = persistReducer(persistConfig, combinedReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+  middleware: [thunk],
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -39,15 +39,21 @@
   border-radius: 5px;
 }
 
-.trackImage {
+.trackImageContainer {
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
-  width: max-content;
-  height: max-content;
+  width: 100%;
+  height: 100%;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   margin-bottom: 10px;
+}
+
+.trackImage {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .nameAndArtistsContainer {
@@ -94,4 +100,42 @@
   font-family: "Inter", sans-serif;
   opacity: 0.8;
   margin-bottom: 0;
+}
+
+@media only screen and (max-width: 850px) {
+  .trackItem {
+    padding: 15px;
+  }
+
+  .container {
+    width: 180px;
+    height: 260px;
+    min-height: 280px;
+    min-width: 180px;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .container {
+    width: 90%;
+    height: max-content;
+    min-height: 180px;
+    min-width: 90%;
+  }
+
+  .trackItem {
+    flex-direction: row;
+  }
+
+  .trackImageContainer {
+    width: 140px;
+    max-width: 150px;
+    max-height: 150px;
+    height: 140px;
+  }
+
+  .nameAndArtistsContainer {
+    margin-left: 15px;
+    align-items: flex-start;
+  }
 }

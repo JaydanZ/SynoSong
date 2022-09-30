@@ -16,6 +16,7 @@
     "axios": "^0.27.2",
     "embla-carousel-react": "^7.0.3",
     "framer-motion": "^7.3.4",
+    "hamburger-react": "^2.5.0",
     "next": "12.2.5",
     "next-auth": "^4.10.3",
     "node-vibrant": "^3.2.1-alpha.1",
@@ -25,7 +26,8 @@
     "react-redux": "^8.0.2",
     "react-spotify-web-playback": "^0.10.0",
     "react-toastify": "^9.0.8",
-    "redux-persist": "^6.0.0",
+    "redux-persist": "^5.10.0",
+    "reduxjs-toolkit-persist": "^7.2.1",
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {

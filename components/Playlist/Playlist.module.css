@@ -23,8 +23,16 @@
 .importHeader {
   font-family: "Inter", sans-serif;
   font-weight: bold;
-  font-size: 2.5rem;
   color: white;
+}
+
+.importHeader {
+  font-size: 2.5rem;
+}
+
+.playlistHeader {
+  font-size: 4rem;
+  margin-bottom: 30px;
 }
 
 .playlistContent {
@@ -33,8 +41,23 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 60vh;
+  max-height: 60vh;
   overflow-y: auto;
+}
+
+.importLoginNeeded,
+.importPlaylistNeeded {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+
+.importLoginNeeded {
+  margin-top: 30px;
+}
+
+.importPlaylistNeeded {
+  font-size: 1.6rem;
 }
 
 .importBtn,

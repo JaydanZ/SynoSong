@@ -34,11 +34,16 @@ export const playlistSlice = createSlice({
       );
       state.playlist = tempPlaylist;
     },
+
+    clear: (state) => {
+      // Clear playlist array
+      state.playlist = [];
+    },
   },
 });
 
 // Actions for each reducer function
-export const { add, remove } = playlistSlice.actions;
+export const { add, remove, clear } = playlistSlice.actions;
 
 export const selectPlaylist = (state: RootState) => state.playlist.playlist;
 

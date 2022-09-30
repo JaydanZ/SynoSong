@@ -20,12 +20,12 @@ const TrackItem: React.FC<{
   return (
     <div className={styles.container} onClick={trackClickHandler}>
       <div className={styles.trackItem}>
-        <div className={styles.trackImage}>
+        <div className={styles.trackImageContainer}>
           <Image
             src={props.trackAlbumImage}
             alt={props.trackName}
-            width="200px"
-            height="200px"
+            layout="fill"
+            className={styles.trackImage}
           />
         </div>
         <div className={styles.nameAndArtistsContainer}>
@@ -39,11 +39,6 @@ const TrackItem: React.FC<{
                 {`, ${props.trackArtists[1].name}`}
               </h2>
             )}
-            {/* {props.trackArtists.map((artist, index) => (
-              <h2 className={styles.artistsContainerText} key={index}>
-                {artist.name}
-              </h2>
-            ))} */}
           </div>
           <div className={styles.albumName}>
             <h2 className={styles.albumNameText}>{props.trackAlbumName}</h2>

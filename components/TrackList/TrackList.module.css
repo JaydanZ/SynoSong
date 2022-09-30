@@ -4,6 +4,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  width: 800px;
+  max-width: 800px;
   height: max-content;
 }

@@ -7,6 +7,7 @@ import { add, remove, selectPlaylist } from "../../Store/playlistSlice";
 import SpotifyPlayer from "react-spotify-web-playback";
 import TrackPlayer from "../TrackPlayer/TrackPlayer";
 import TrackCarousel from "../TrackCarousel/TrackCarousel";
+import { toast } from "react-toastify";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import styles from "./TrackInspect.module.css";
 
@@ -44,10 +45,29 @@ const TrackInspect: React.FC<{
         uri: props.trackData.uri,
       })
     );
+
+    toast.success("Track added!", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   const removeFromPlaylist = () => {
     dispatch(remove(props.trackData.id));
+    toast.error("Track removed.", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   useEffect(() => {
