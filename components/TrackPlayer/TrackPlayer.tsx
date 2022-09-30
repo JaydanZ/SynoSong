@@ -118,6 +118,8 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
     if (duration === 0) {
       onLoadedMetadata();
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
