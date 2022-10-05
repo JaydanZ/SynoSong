@@ -7,9 +7,9 @@
   justify-content: flex-start;
   /* background: linear-gradient(rgb(var(--background-clr)), rgb(3, 3, 3) 50%); */
 
-  background: linear-gradient(rgb(35, 35, 35), rgb(12, 12, 12));
+  background: linear-gradient(rgb(35, 35, 35) 0%, rgb(12, 12, 12) 50%);
   width: 100vw;
-  height: 100vh;
+  height: max-content;
   overflow: visible;
 }
 
@@ -21,7 +21,7 @@
   max-width: 1200px;
   width: 70vw;
   height: 100vh;
-  margin-top: 150px;
+  margin-top: 0;
 }
 
 .trackCarouselContainer {
@@ -154,4 +154,93 @@
   background-color: rgb(255, 255, 255);
   color: black;
   top: 5px;
+}
+
+@media only screen and (max-width: 920px) {
+  .returnBtn {
+    position: relative;
+    top: 100px;
+  }
+
+  .trackContainer {
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+
+  .trackDataContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .trackImageContainer {
+    margin-right: 0;
+  }
+
+  .trackInfoContainer {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .trackName {
+    font-size: 3rem;
+  }
+
+  .trackInfoLabels,
+  .trackAlbum,
+  .trackArtists {
+    margin-left: 5px;
+  }
+
+  .trackAlbum,
+  .trackArtists {
+    font-size: 1.2rem;
+    color: rgb(172, 172, 172);
+  }
+
+  .trackCarouselContainer {
+    margin-top: 0;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .returnBtn {
+    position: unset;
+    top: 0;
+    margin-top: 100px;
+    margin-bottom: 0;
+    font-size: 3rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  /* .returnBtn {
+    margin-top: 170px;
+    font-size: 3rem;
+  } */
+  .trackContainer {
+    margin-top: 0;
+    width: 80vw;
+  }
+
+  .trackImageContainer {
+    width: 300px;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  .trackName {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .trackInfoLabels {
+    display: none;
+  }
+
+  .trackAlbum,
+  .trackArtists {
+    font-size: 0.8rem;
+    color: rgb(172, 172, 172);
+  }
 }

@@ -8,7 +8,7 @@ import SpotifyPlayer from "react-spotify-web-playback";
 import TrackPlayer from "../TrackPlayer/TrackPlayer";
 import TrackCarousel from "../TrackCarousel/TrackCarousel";
 import { toast } from "react-toastify";
-import { FaArrowCircleLeft } from "react-icons/fa";
+import { BsArrowLeftShort } from "react-icons/bs";
 import styles from "./TrackInspect.module.css";
 
 const TrackInspect: React.FC<{
@@ -83,7 +83,7 @@ const TrackInspect: React.FC<{
       <div className={styles.trackContainer}>
         <Link href="/">
           <a className={styles.returnBtn}>
-            <FaArrowCircleLeft />
+            <BsArrowLeftShort />
           </a>
         </Link>
         <div className={styles.trackDataContainer}>

@@ -175,3 +175,30 @@
 .volumeBar:active::-moz-range-thumb {
   background: var(--selectedKnob);
 }
+
+@media only screen and (max-width: 600px) {
+  .progressBar {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .trackPlayer {
+    margin-top: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+
+  .playerPlayPause,
+  .playerMute {
+    font-size: 1.5rem;
+  }
+
+  .duration,
+  .currentTime {
+    font-size: 1rem;
+  }
+  .volumeBar {
+    width: 50px;
+  }
+}
