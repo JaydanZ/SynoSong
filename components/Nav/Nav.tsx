@@ -74,6 +74,7 @@ const Navbar = () => {
             About
           </h1>
         </div>
+        <div className={styles.linkDivider}></div>
         <div className={styles.authLinks}>
           {isLoggedIn === true && (
             <div className={styles.navLoginState}>
@@ -94,6 +95,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+
       <div className={styles.mobileNavBtn}>
         <Hamburger
           toggled={isOpen}

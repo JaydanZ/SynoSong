@@ -144,3 +144,35 @@
   font-size: 1rem;
   color: rgb(224, 97, 97);
 }
+
+@media only screen and (max-width: 800px) {
+  .importForm {
+    width: 100%;
+  }
+
+  .importHeader {
+    margin-bottom: 20px;
+  }
+
+  .importBtn {
+    width: 100%;
+  }
+
+  .importNameField {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .playlistHeader {
+    font-size: 3rem;
+  }
+
+  .importHeader {
+    font-size: 1.5rem;
+  }
+
+  .closeImportFormBtn {
+    font-size: 1.9rem;
+  }
+}

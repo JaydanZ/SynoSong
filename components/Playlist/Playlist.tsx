@@ -72,8 +72,6 @@ const Playlist: React.FC<{}> = () => {
         progress: undefined,
       });
     }
-    // Import playlist into spotify account
-    // We must first create a playlist on spotify
   };
 
   const toggleImportState = () => {
