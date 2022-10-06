@@ -32,6 +32,7 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
     const returnedMinutes: string = minutes.toString(); //< 10 ? `0${minutes}` : `${minutes}`;
     const seconds: number = Math.floor(secs % 60);
     const returnedSeconds: string = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
     return `${returnedMinutes}:${returnedSeconds}`;
   };
 
@@ -114,13 +115,13 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (duration === 0) {
-      onLoadedMetadata();
-    }
+  // useEffect(() => {
+  //   if (duration === 0) {
+  //     onLoadedMetadata();
+  //   }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <div className={styles.trackPlayer}>
@@ -142,7 +143,7 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
         onChange={changeRange}
       />
       <div className={styles.duration}>
-        {duration && !isNaN(duration) && calcTime(duration)}
+        {duration !== 0 && !isNaN(duration) && calcTime(duration)}
       </div>
       <div className={styles.volumeControls}>
         <button className={styles.playerMute} onClick={volumeMuteHandler}>

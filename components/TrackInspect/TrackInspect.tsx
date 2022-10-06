@@ -8,7 +8,7 @@ import SpotifyPlayer from "react-spotify-web-playback";
 import TrackPlayer from "../TrackPlayer/TrackPlayer";
 import TrackCarousel from "../TrackCarousel/TrackCarousel";
 import { toast } from "react-toastify";
-import { BsArrowLeftShort } from "react-icons/bs";
+import { BsArrowLeftShort, BsSpotify } from "react-icons/bs";
 import styles from "./TrackInspect.module.css";
 
 const TrackInspect: React.FC<{
@@ -134,26 +134,34 @@ const TrackInspect: React.FC<{
                   <TrackPlayer trackURL={props.trackData.preview_url} />
                 )}
             </div>
+            <div className={styles.btnsContainer}>
+              <Link href={props.trackData.external_urls.spotify}>
+                <button className={styles.openSpotifyBtn}>
+                  Open in <BsSpotify className={styles.spotifyLogo} />
+                </button>
+              </Link>
+
+              {curPlaylist !== undefined &&
+              curPlaylist.length !== 0 &&
+              curPlaylist?.filter((track) => track.id === props.trackData.id)
+                .length !== 0 ? (
+                <button
+                  className={styles.toggleFromPlaylistBtn}
+                  onClick={removeFromPlaylist}
+                >
+                  Remove From Playlist
+                </button>
+              ) : (
+                <button
+                  className={styles.toggleFromPlaylistBtn}
+                  onClick={addToPlaylist}
+                >
+                  Add To Playlist
+                </button>
+              )}
+            </div>
           </div>
         </div>
-        {curPlaylist !== undefined &&
-        curPlaylist.length !== 0 &&
-        curPlaylist?.filter((track) => track.id === props.trackData.id)
-          .length !== 0 ? (
-          <button
-            className={styles.toggleFromPlaylistBtn}
-            onClick={removeFromPlaylist}
-          >
-            Remove From Playlist
-          </button>
-        ) : (
-          <button
-            className={styles.toggleFromPlaylistBtn}
-            onClick={addToPlaylist}
-          >
-            Add To Playlist
-          </button>
-        )}
       </div>
       <div className={styles.trackCarouselContainer}>
         <TrackCarousel trackList={props.artistTopTracks} />

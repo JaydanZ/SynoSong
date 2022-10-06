@@ -20,8 +20,8 @@
   align-items: center;
   max-width: 1200px;
   width: 70vw;
-  height: 100vh;
-  margin-top: 0;
+  height: max-content;
+  margin-top: 140px;
 }
 
 .trackCarouselContainer {
@@ -30,7 +30,7 @@
   justify-content: center;
   width: 100%;
   background-color: rgb(12, 12, 12);
-  margin-top: 150px;
+  margin-top: 80px;
   padding-top: 50px;
   padding-bottom: 50px;
 }
@@ -128,12 +128,19 @@
   margin-top: auto;
 }
 
-.toggleFromPlaylistBtn {
+.btnsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: auto;
+}
+
+.toggleFromPlaylistBtn,
+.openSpotifyBtn {
   position: relative;
   top: 0;
   font-family: "Inter", sans-serif;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
   border: none;
   background-color: rgb(10, 10, 10);
   color: white;
@@ -150,7 +157,19 @@
   transition: all 0.2s ease-in-out;
 }
 
-.toggleFromPlaylistBtn:hover {
+.openSpotifyBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.spotifyLogo {
+  margin-left: 5px;
+}
+
+.toggleFromPlaylistBtn:hover,
+.openSpotifyBtn:hover {
   background-color: rgb(255, 255, 255);
   color: black;
   top: 5px;
@@ -214,10 +233,9 @@
 }
 
 @media only screen and (max-width: 500px) {
-  /* .returnBtn {
-    margin-top: 170px;
-    font-size: 3rem;
-  } */
+  .returnBtn {
+    margin-top: 70px;
+  }
   .trackContainer {
     margin-top: 0;
     width: 80vw;
@@ -242,5 +260,20 @@
   .trackArtists {
     font-size: 0.8rem;
     color: rgb(172, 172, 172);
+  }
+
+  .openSpotifyBtn,
+  .toggleFromPlaylistBtn {
+    margin-left: 0;
+  }
+
+  .openSpotifyBtn {
+    margin-right: 0;
+  }
+
+  .btnsContainer {
+    justify-content: center;
+    align-items: center;
+    margin-right: 0;
   }
 }
