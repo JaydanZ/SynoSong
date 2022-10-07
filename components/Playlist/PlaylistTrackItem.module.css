@@ -30,6 +30,8 @@
   justify-content: center;
   align-items: flex-start;
   margin-left: 20px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .name {
@@ -41,6 +43,10 @@
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 90%;
+  text-overflow: ellipsis;
 }
 
 .name:hover {
@@ -52,6 +58,10 @@
   font-size: 0.8rem;
   font-weight: 300;
   color: rgb(165, 165, 165);
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 90%;
+  text-overflow: ellipsis;
 }
 
 .removeTrackBtn {

@@ -10,6 +10,7 @@ import type {
 import styles from "./TrackInspectPage.module.css";
 import TrackInspect from "../../components/TrackInspect/TrackInspect";
 import Vibrant from "node-vibrant";
+import { motion } from "framer-motion";
 
 const TrackInspectPage: NextPage<{
   success: boolean;
@@ -19,21 +20,28 @@ const TrackInspectPage: NextPage<{
   errorMessage?: string;
 }> = (props) => {
   return (
-    <div className={styles.container}>
-      {props.success === false && (
-        <h1 className={styles.errorText}>
-          <span className={styles.errorTextSpan}>Error:</span> Track does not
-          exist.
-        </h1>
-      )}
-      {props.success === true && (
-        <TrackInspect
-          trackData={props.trackData!}
-          imgPalette={props.imagePalette}
-          artistTopTracks={props.artistTopTracks}
-        />
-      )}
-    </div>
+    <motion.div
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      key="trackInspect"
+    >
+      <div className={styles.container}>
+        {props.success === false && (
+          <h1 className={styles.errorText}>
+            <span className={styles.errorTextSpan}>Error:</span> Track does not
+            exist.
+          </h1>
+        )}
+        {props.success === true && (
+          <TrackInspect
+            trackData={props.trackData!}
+            imgPalette={props.imagePalette}
+            artistTopTracks={props.artistTopTracks}
+          />
+        )}
+      </div>
+    </motion.div>
   );
 };
 

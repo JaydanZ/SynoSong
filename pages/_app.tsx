@@ -1,5 +1,8 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import Router from "next/router";
+import NProgress from "nprogress";
+import "../styles/nprogress.css";
 import React from "react";
 import Navbar from "../components/Nav/Nav";
 import { Provider } from "react-redux";
@@ -7,8 +10,16 @@ import { store } from "../Store/store";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { SessionProvider } from "next-auth/react";
+import { AnimatePresence } from "framer-motion";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+// Route loading progress
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
+
+NProgress.configure({ showSpinner: false });
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   let persistor = persistStore(store);
@@ -30,7 +41,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
             pauseOnHover
             theme="dark"
           />
-          <Component {...pageProps} />
+          <AnimatePresence mode="wait">
+            <Component {...pageProps} />
+          </AnimatePresence>
         </PersistGate>
       </Provider>
     </SessionProvider>

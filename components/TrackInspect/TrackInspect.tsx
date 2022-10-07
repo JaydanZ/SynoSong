@@ -10,13 +10,16 @@ import TrackCarousel from "../TrackCarousel/TrackCarousel";
 import { toast } from "react-toastify";
 import { BsArrowLeftShort, BsSpotify } from "react-icons/bs";
 import styles from "./TrackInspect.module.css";
+import useCheckLogin from "../../hooks/useCheckLogin";
 
 const TrackInspect: React.FC<{
   trackData: SpotifyApi.TrackObjectFull;
   imgPalette: number[];
   artistTopTracks: SpotifyApi.TrackObjectFull[] | undefined;
 }> = (props) => {
-  const [isSessionValid, setSession] = useState<boolean>(false);
+  //const [isSessionValid, setSession] = useState<boolean>(false);
+
+  const { isLoggedIn, session } = useCheckLogin();
 
   const curPlaylist = useSelector(selectPlaylist);
   const dispatch = useDispatch();
@@ -25,7 +28,7 @@ const TrackInspect: React.FC<{
   let containerRef = useRef<HTMLDivElement>(null);
 
   // Grab current session
-  const { data: session } = useSession();
+  //const { data: session } = useSession();
 
   const generateGradient = () => {
     containerRef.current!.style.setProperty(
@@ -70,14 +73,6 @@ const TrackInspect: React.FC<{
     });
   };
 
-  useEffect(() => {
-    if (session) {
-      setSession(true);
-    } else {
-      setSession(false);
-    }
-  }, [session]);
-
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.trackContainer}>
@@ -109,7 +104,7 @@ const TrackInspect: React.FC<{
               ))}
             </div>
             <div className={styles.trackPlayerContainer}>
-              {isSessionValid === true && (
+              {isLoggedIn === true && session && (
                 <SpotifyPlayer
                   token={session!.user.accessToken}
                   uris={[props.trackData.uri]}
@@ -123,16 +118,12 @@ const TrackInspect: React.FC<{
                   }}
                 />
               )}
-              {props.trackData.preview_url === null &&
-                isSessionValid === false && (
-                  <h1 className={styles.trackPreviewError}>
-                    No Preview Exists
-                  </h1>
-                )}
-              {props.trackData.preview_url !== null &&
-                isSessionValid === false && (
-                  <TrackPlayer trackURL={props.trackData.preview_url} />
-                )}
+              {props.trackData.preview_url === null && isLoggedIn === false && (
+                <h1 className={styles.trackPreviewError}>No Preview Exists</h1>
+              )}
+              {props.trackData.preview_url !== null && isLoggedIn === false && (
+                <TrackPlayer trackURL={props.trackData.preview_url} />
+              )}
             </div>
             <div className={styles.btnsContainer}>
               <Link href={props.trackData.external_urls.spotify}>

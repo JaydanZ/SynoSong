@@ -24,8 +24,8 @@ const TrackItem: React.FC<{
           <Image
             src={props.trackAlbumImage}
             alt={props.trackName}
-            layout="fill"
-            className={styles.trackImage}
+            width="350px"
+            height="350px"
           />
         </div>
         <div className={styles.nameAndArtistsContainer}>

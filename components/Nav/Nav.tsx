@@ -1,14 +1,16 @@
 import styles from "./Nav.module.css";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { IoPerson } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Divide as Hamburger } from "hamburger-react";
+import useCheckLogin from "../../hooks/useCheckLogin";
 
 const Navbar = () => {
-  const [isLoggedIn, setLoginState] = useState<boolean>(false);
   const [mobileNavState, setMobileNav] = useState<boolean>(false);
   const [isOpen, setOpen] = useState<boolean>(false);
+
+  const { isLoggedIn, session } = useCheckLogin();
 
   const navContainerClass = mobileNavState
     ? `${styles["active"]} ${styles.navContainer}`
@@ -18,19 +20,9 @@ const Navbar = () => {
     ? `${styles["active"]} ${styles.navItemsContainer}`
     : styles.navItemsContainer;
 
-  const { data: session, status } = useSession();
-
   const closeNav = () => {
     setMobileNav(false);
     setOpen(false);
-  };
-
-  const signOutHandler = () => {
-    if (isOpen === true) {
-      setOpen(false);
-      setMobileNav(false);
-    }
-    signOut();
   };
 
   const toggleMobileNav = (toggled: any) => {
@@ -43,13 +35,13 @@ const Navbar = () => {
     }
   };
 
-  useEffect(() => {
-    if (session?.error === "RefreshAccessTokenError" || session === null) {
-      setLoginState(false);
-    } else {
-      setLoginState(true);
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (session?.error === "RefreshAccessTokenError" || session === null) {
+  //     setLoginState(false);
+  //   } else {
+  //     setLoginState(true);
+  //   }
+  // }, [session]);
 
   return (
     <nav className={navContainerClass}>
