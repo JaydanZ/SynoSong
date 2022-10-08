@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { remove, selectPlaylist } from "../../Store/playlistSlice";
 import { useSession } from "next-auth/react";
@@ -9,12 +9,16 @@ import { IoClose } from "react-icons/io5";
 import styles from "./Playlist.module.css";
 
 const Playlist: React.FC<{}> = () => {
+  // States
   const [isImporting, setImportState] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [importError, setImportError] = useState<boolean>(false);
   const playlistName = useRef<HTMLInputElement>(null);
 
+  // Hooks
   const { data: session } = useSession();
 
+  // Playlist state
   const playlist = useSelector(selectPlaylist);
   const dispatch = useDispatch();
 
@@ -34,10 +38,12 @@ const Playlist: React.FC<{}> = () => {
   const importPlaylist = async (event: React.FormEvent) => {
     event.preventDefault();
     setImportError(false);
+    setLoading(true);
 
     try {
       if (playlistName?.current?.value.length === 0) {
         setImportError(true);
+        setLoading(false);
         return;
       }
 
@@ -51,6 +57,8 @@ const Playlist: React.FC<{}> = () => {
         tracks!
       );
 
+      setLoading(false);
+
       toast.success("Playlist imported successfully!", {
         position: "bottom-center",
         autoClose: 5000,
@@ -62,6 +70,7 @@ const Playlist: React.FC<{}> = () => {
       });
     } catch (error) {
       setImportError(true);
+      setLoading(false);
       toast.error("ERROR: An unknown error has occurred...", {
         position: "bottom-center",
         autoClose: 5000,
@@ -138,15 +147,20 @@ const Playlist: React.FC<{}> = () => {
                 Error: Input field cannot be blank.
               </h1>
             )}
-            <input
-              type="text"
-              placeholder="Playlist Name"
-              className={styles.importNameField}
-              ref={playlistName}
-            />
-            <button type="submit" className={styles.importBtn}>
-              Import
-            </button>
+            {loading && <div className={styles.loadingText}>Importing...</div>}
+            {!loading && (
+              <React.Fragment>
+                <input
+                  type="text"
+                  placeholder="Playlist Name"
+                  className={styles.importNameField}
+                  ref={playlistName}
+                />
+                <button type="submit" className={styles.importBtn}>
+                  Import
+                </button>
+              </React.Fragment>
+            )}
           </form>
         )}
       </div>

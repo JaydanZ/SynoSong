@@ -126,8 +126,7 @@
   padding: 10px;
   margin: 10px;
   margin-left: 0;
-  border-color: rgb(125, 89, 172);
-  background-color: rgba(125, 89, 172, 0.192);
+  border-color: rgb(17, 17, 17);
   border-width: 2px;
   border-style: solid;
   border-radius: 10px;
@@ -135,7 +134,8 @@
 
 .importNameField:focus {
   outline: none !important;
-  border-color: rgb(91, 3, 206);
+  border: 2px solid #7f00ff;
+  box-shadow: 0 0 10px #410081;
 }
 
 .importError {
@@ -143,6 +143,12 @@
   font-weight: bold;
   font-size: 1rem;
   color: rgb(224, 97, 97);
+}
+
+.loadingText {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
 }
 
 @media only screen and (max-width: 800px) {
@@ -174,5 +180,11 @@
 
   .closeImportFormBtn {
     font-size: 1.9rem;
+  }
+
+  .loadingText {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 1.2rem;
   }
 }

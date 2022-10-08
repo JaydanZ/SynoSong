@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import TrackItem from "../Tracks/TrackItem";
+import TrackCarouselItem from "./TrackCarouselItem";
 import styles from "./TrackCarousel.module.css";
 import useEmblaCarousel from "embla-carousel-react";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
@@ -25,7 +25,7 @@ const TrackCarousel: React.FC<{
           {props.trackList !== undefined &&
             props.trackList.map((track, index) => (
               <div className={styles.emblaSlide} key={index}>
-                <TrackItem
+                <TrackCarouselItem
                   trackName={track.name}
                   trackArtists={track.artists}
                   trackAlbumName={track.album.name}

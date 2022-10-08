@@ -1,18 +1,20 @@
 import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { insertList, selectTrackList } from "../../Store/trackListSlice";
-import styles from "./SearchBox.module.css";
 import { findSongs } from "../../services/FindSongs";
-import TrackList from "../TrackList/TrackList";
 import { generateWord } from "../../services/GenerateWord";
 import { toast } from "react-toastify";
+import TrackList from "../TrackList/TrackList";
 import type { trackListObj, trackListApiRes } from "../../types/types";
+import styles from "./SearchBox.module.css";
 
 const SearchBox = () => {
+  // States
   const wordInputRef = useRef<HTMLInputElement>(null);
   const [searchError, setSearchError] = useState<boolean>(false);
   const [searchErrorMsg, setSearchErrorMsg] = useState<string>("");
   const [searchState, setSearchState] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const trackList = useSelector(selectTrackList);
   const dispatch = useDispatch();
 
@@ -49,6 +51,7 @@ const SearchBox = () => {
 
   const searchWordHandler = async (event: React.FormEvent) => {
     event.preventDefault();
+    setLoading(true);
 
     const wordInput: string | undefined = wordInputRef.current?.value;
 
@@ -57,15 +60,18 @@ const SearchBox = () => {
     if (wordInput != null) {
       if (/\d/.test(wordInput)) {
         setSearchError(true);
+        setLoading(false);
         return;
       }
       const res = await findSongs(wordInput);
 
       validateApiResponse(res);
+      setLoading(false);
     }
   };
 
   const generateWordHandler = async () => {
+    setLoading(true);
     let tracksRes: trackListObj;
 
     // Fetch random word from API
@@ -75,6 +81,7 @@ const SearchBox = () => {
     const tracks = await findSongs(randomWord.data[0]);
 
     validateApiResponse(tracks);
+    setLoading(false);
   };
 
   return (
@@ -108,9 +115,14 @@ const SearchBox = () => {
           Error: Input cannot contain numbers or special characters.
         </h1>
       )}
-      <div className={styles.tracksContainer}>
-        {trackList?.length !== 0 && <TrackList tracks={trackList} />}
-      </div>
+
+      {loading && <h1>Loading...</h1>}
+
+      {!loading && (
+        <div className={styles.tracksContainer}>
+          {trackList?.length !== 0 && <TrackList tracks={trackList} />}
+        </div>
+      )}
     </div>
   );
 };

@@ -17,19 +17,17 @@ const TrackInspect: React.FC<{
   imgPalette: number[];
   artistTopTracks: SpotifyApi.TrackObjectFull[] | undefined;
 }> = (props) => {
-  //const [isSessionValid, setSession] = useState<boolean>(false);
-
+  // Hooks
   const { isLoggedIn, session } = useCheckLogin();
 
+  // Grab Playlist state
   const curPlaylist = useSelector(selectPlaylist);
   const dispatch = useDispatch();
 
   // Refs
   let containerRef = useRef<HTMLDivElement>(null);
 
-  // Grab current session
-  //const { data: session } = useSession();
-
+  // Generate gradient based on album cover primary color
   const generateGradient = () => {
     containerRef.current!.style.setProperty(
       "--background-clr",

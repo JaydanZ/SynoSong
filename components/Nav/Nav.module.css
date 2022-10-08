@@ -102,14 +102,24 @@
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
-  background-color: white;
-  color: black;
+  background: none;
+  color: white;
   border-radius: 10px;
+  border-color: white;
+  border-width: 2px;
+  border-style: solid;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 6px;
   padding-bottom: 6px;
   margin-right: 140px;
+  transition: all 0.2s ease-in-out;
+}
+
+.loginBtn:hover,
+.loginBtn:focus {
+  background-color: white;
+  color: black;
 }
 
 .mobileNavBtn {

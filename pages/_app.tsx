@@ -1,10 +1,8 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import Router from "next/router";
-import NProgress from "nprogress";
-import "../styles/nprogress.css";
 import React from "react";
+import Router from "next/router";
 import Navbar from "../components/Nav/Nav";
+import NProgress from "nprogress";
+import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { store } from "../Store/store";
 import { persistStore } from "redux-persist";
@@ -12,6 +10,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import { SessionProvider } from "next-auth/react";
 import { AnimatePresence } from "framer-motion";
 import { ToastContainer } from "react-toastify";
+import "../styles/nprogress.css";
+import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
 // Route loading progress

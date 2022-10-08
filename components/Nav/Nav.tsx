@@ -7,9 +7,11 @@ import { Divide as Hamburger } from "hamburger-react";
 import useCheckLogin from "../../hooks/useCheckLogin";
 
 const Navbar = () => {
+  // State
   const [mobileNavState, setMobileNav] = useState<boolean>(false);
   const [isOpen, setOpen] = useState<boolean>(false);
 
+  // Hooks
   const { isLoggedIn, session } = useCheckLogin();
 
   const navContainerClass = mobileNavState
@@ -34,14 +36,6 @@ const Navbar = () => {
       setMobileNav(false);
     }
   };
-
-  // useEffect(() => {
-  //   if (session?.error === "RefreshAccessTokenError" || session === null) {
-  //     setLoginState(false);
-  //   } else {
-  //     setLoginState(true);
-  //   }
-  // }, [session]);
 
   return (
     <nav className={navContainerClass}>
