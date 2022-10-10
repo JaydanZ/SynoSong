@@ -10,7 +10,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { SessionProvider } from "next-auth/react";
 import { AnimatePresence } from "framer-motion";
 import { ToastContainer } from "react-toastify";
-import "../styles/nprogress.css";
+import "../styles/Nprogress.css";
 import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
