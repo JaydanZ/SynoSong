@@ -3,7 +3,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background: #0e0e0e;
 }
@@ -15,22 +15,48 @@
   align-items: center;
   max-width: 800px;
   width: 70vw;
-  height: 80%;
+  height: max-content;
   background-color: white;
   border-radius: 10px;
-  background-color: rgb(29, 29, 29);
-  padding: 10px;
+  /* background-color: rgb(29, 29, 29); */
+  background-image: linear-gradient(45deg, #111111, #252525);
+  padding: 15px;
+  margin-top: 160px;
 }
 
 .loginHeader,
-.loginFeatures {
+.loginFeatures,
+.loginSubHeader {
   font-family: "Inter", sans-serif;
 }
 
 .loginHeader {
-  color: white;
-  font-size: 2.5rem;
+  background-image: linear-gradient(45deg, #7f00ff, #e100ff);
+  background-size: 100%;
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  font-size: 3rem;
   font-weight: bold;
+}
+
+.loginSubHeader {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.loginFeatures {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.loginFeaturesItems {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .loginBtn {
@@ -39,9 +65,30 @@
   font-size: 1rem;
   width: 180px;
   height: 40px;
-  color: black;
-  background-color: rgb(30, 215, 96);
+  color: white;
+  background-color: rgb(14, 14, 14);
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.loginBtn:hover {
+  color: black;
+  background-color: rgb(255, 255, 255);
+}
+
+@media only screen and (max-width: 600px) {
+  .loginContainer {
+    padding: 10px;
+  }
+
+  .loginSubHeader {
+    font-size: 1.2rem;
+  }
+
+  .loginFeaturesItems {
+    font-size: 0.9rem;
+  }
 }

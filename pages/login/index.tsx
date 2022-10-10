@@ -1,17 +1,31 @@
 import { NextPage } from "next";
 import type { GetServerSideProps } from "next";
-import styles from "./login.module.css";
 import { getProviders, signIn } from "next-auth/react";
 import { Providers } from "../../types/next-auth-custom";
+import { motion } from "framer-motion";
+import styles from "./login.module.css";
 
 const login: NextPage<{ providers: Providers }> = ({ providers }) => {
   return (
-    <div className={styles.container}>
+    <motion.div
+      className={styles.container}
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      key="login"
+    >
       <div className={styles.loginContainer}>
-        <h1 className={styles.loginHeader}>Login to access these features:</h1>
+        <h1 className={styles.loginHeader}>Login</h1>
+        <div className={styles.loginSubHeader}>
+          Login with your Spotify account to access these features:
+        </div>
         <ul className={styles.loginFeatures}>
-          <li>Listen to full length tracks instead of previews</li>
-          <li>Create your own custom playlist and import it into Spotify</li>
+          <li className={styles.loginFeaturesItems}>
+            Listen to full length tracks instead of previews
+          </li>
+          <li className={styles.loginFeaturesItems}>
+            Create your own custom playlist and import it into Spotify
+          </li>
         </ul>
 
         {Object.values(providers).map((provider, index) => (
@@ -24,7 +38,7 @@ const login: NextPage<{ providers: Providers }> = ({ providers }) => {
           </button>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

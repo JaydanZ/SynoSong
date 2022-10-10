@@ -20,13 +20,23 @@ const SearchBox = () => {
 
   const validateApiResponse = (res: trackListApiRes) => {
     setSearchErrorMsg("");
-    if (res.tracks !== undefined) {
+    if (res.tracks !== undefined && res.tracks?.length > 0) {
       const tracksResponse: trackListObj = res.tracks;
 
       dispatch(insertList(tracksResponse));
       setSearchState(false);
 
       toast.success("Tracks Loaded!", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (res.tracks!.length === 0) {
+      toast.error("No results found for generated word.", {
         position: "bottom-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -72,7 +82,6 @@ const SearchBox = () => {
 
   const generateWordHandler = async () => {
     setLoading(true);
-    let tracksRes: trackListObj;
 
     // Fetch random word from API
     const randomWord = await generateWord();

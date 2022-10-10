@@ -31,14 +31,8 @@ const TrackItem: React.FC<{
         <div className={styles.nameAndArtistsContainer}>
           <h1 className={styles.trackName}>{props.trackName}</h1>
           <div className={styles.artistsContainer}>
-            <h2 className={styles.artistsContainerText}>
-              {props.trackArtists[0].name}
-            </h2>
-            {props.trackArtists.length > 1 && (
-              <h2 className={styles.artistsContainerText}>
-                {`, ${props.trackArtists[1].name}`}
-              </h2>
-            )}
+            {props.trackArtists[0].name}
+            {props.trackArtists.length > 1 && `, ${props.trackArtists[1].name}`}
           </div>
           <div className={styles.albumName}>
             <h2 className={styles.albumNameText}>{props.trackAlbumName}</h2>

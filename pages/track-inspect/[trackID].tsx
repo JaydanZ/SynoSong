@@ -20,12 +20,7 @@ const TrackInspectPage: NextPage<{
   errorMessage?: string;
 }> = (props) => {
   return (
-    <motion.div
-      exit={{ opacity: 0 }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      key="trackInspect"
-    >
+    <div>
       <div className={styles.container}>
         {props.success === false && (
           <h1 className={styles.errorText}>
@@ -41,7 +36,7 @@ const TrackInspectPage: NextPage<{
           />
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

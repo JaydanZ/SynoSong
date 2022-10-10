@@ -274,6 +274,10 @@
     color: rgb(172, 172, 172);
   }
 
+  .trackArtists {
+    margin-right: 5px;
+  }
+
   .openSpotifyBtn,
   .toggleFromPlaylistBtn {
     margin-left: 0;

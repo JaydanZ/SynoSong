@@ -4,7 +4,7 @@ import type { songQueryType, trackListApiRes } from "../types/types";
 export const findSongs = async (data: string) => {
   const options: songQueryType = {
     method: "POST",
-    url: "/api/find-songs",
+    url: `/api/find-songs`,
     headers: {
       "Content-Type": "application/json",
     },
@@ -29,17 +29,4 @@ export const findSongs = async (data: string) => {
   }
 
   return trackRes;
-};
-
-export const findSpecificSong = async (data: string | string[]) => {
-  const options: songQueryType = {
-    method: "POST",
-    url: "/api/find-specific-song",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify({ id: data }),
-  };
-  const response = await axios(options);
-  return response;
 };

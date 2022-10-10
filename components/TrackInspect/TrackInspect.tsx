@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { add, remove, selectPlaylist } from "../../Store/playlistSlice";
+import { toast } from "react-toastify";
+import { BsArrowLeftShort, BsSpotify } from "react-icons/bs";
+import { motion } from "framer-motion";
 import SpotifyPlayer from "react-spotify-web-playback";
 import TrackPlayer from "../TrackPlayer/TrackPlayer";
 import TrackCarousel from "../TrackCarousel/TrackCarousel";
-import { toast } from "react-toastify";
-import { BsArrowLeftShort, BsSpotify } from "react-icons/bs";
 import styles from "./TrackInspect.module.css";
 import useCheckLogin from "../../hooks/useCheckLogin";
 
@@ -72,7 +72,14 @@ const TrackInspect: React.FC<{
   };
 
   return (
-    <div className={styles.container} ref={containerRef}>
+    <motion.div
+      className={styles.container}
+      ref={containerRef}
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      key={"trackInspect" + props.trackData.id}
+    >
       <div className={styles.trackContainer}>
         <Link href="/">
           <a className={styles.returnBtn}>
@@ -155,7 +162,7 @@ const TrackInspect: React.FC<{
       <div className={styles.trackCarouselContainer}>
         <TrackCarousel trackList={props.artistTopTracks} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

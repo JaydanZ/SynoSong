@@ -9,7 +9,7 @@ export const importPlaylistHandler = async (
   try {
     const options = {
       method: "POST",
-      url: "/api/import-playlist",
+      url: `/api/import-playlist`,
       headers: {
         "Content-Type": "application/json",
       },
