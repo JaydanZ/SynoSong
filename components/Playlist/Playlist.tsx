@@ -2,13 +2,13 @@ import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { remove, selectPlaylist } from "../../Store/playlistSlice";
 import { useSession } from "next-auth/react";
-import { toast } from "react-toastify";
-import PlaylistTrackItem from "./PlaylistTrackItem";
 import { importPlaylistHandler } from "../../services/ImportPlaylist";
 import { IoClose } from "react-icons/io5";
+import { toast } from "react-toastify";
+import PlaylistTrackItem from "./PlaylistTrackItem";
 import styles from "./Playlist.module.css";
 
-const Playlist: React.FC<{}> = () => {
+const Playlist: React.FC = () => {
   // States
   const [isImporting, setImportState] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
@@ -58,6 +58,7 @@ const Playlist: React.FC<{}> = () => {
       );
 
       setLoading(false);
+      toggleImportState();
 
       toast.success("Playlist imported successfully!", {
         position: "bottom-center",

@@ -12,19 +12,16 @@ const SearchBox = () => {
   // States
   const wordInputRef = useRef<HTMLInputElement>(null);
   const [searchError, setSearchError] = useState<boolean>(false);
-  const [searchErrorMsg, setSearchErrorMsg] = useState<string>("");
-  const [searchState, setSearchState] = useState<boolean>(true);
+  const [searchState, setSearchState] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const trackList = useSelector(selectTrackList);
   const dispatch = useDispatch();
 
   const validateApiResponse = (res: trackListApiRes) => {
-    setSearchErrorMsg("");
     if (res.tracks !== undefined && res.tracks?.length > 0) {
       const tracksResponse: trackListObj = res.tracks;
 
       dispatch(insertList(tracksResponse));
-      setSearchState(false);
 
       toast.success("Tracks Loaded!", {
         position: "bottom-center",
@@ -55,13 +52,13 @@ const SearchBox = () => {
         draggable: true,
         progress: undefined,
       });
-      setSearchErrorMsg(res.error!);
     }
   };
 
   const searchWordHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
+    setSearchState(true);
 
     const wordInput: string | undefined = wordInputRef.current?.value;
 
@@ -82,12 +79,28 @@ const SearchBox = () => {
 
   const generateWordHandler = async () => {
     setLoading(true);
+    setSearchState(true);
 
     // Fetch random word from API
     const randomWord = await generateWord();
 
+    if (randomWord.success === false) {
+      toast.error(randomWord.error?.toString(), {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      setLoading(false);
+      return;
+    }
+
     // Generate synonyms from word and fetch songs from spotify API
-    const tracks = await findSongs(randomWord.data[0]);
+    const tracks = await findSongs(randomWord.word!);
 
     validateApiResponse(tracks);
     setLoading(false);
@@ -95,7 +108,7 @@ const SearchBox = () => {
 
   return (
     <div className={styles.searchBoxContainer}>
-      {searchState === true && (
+      {searchState === false && (
         <React.Fragment>
           {" "}
           <h2 className={styles.searchCTA}>
