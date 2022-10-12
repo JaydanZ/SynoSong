@@ -278,12 +278,12 @@
     margin-right: 5px;
   }
 
-  .trackPlayerContainer {
+  /* .trackPlayerContainer {
     position: fixed;
     bottom: 0;
     left: 0;
     z-index: 3000;
-  }
+  } */
 
   .openSpotifyBtn,
   .toggleFromPlaylistBtn {
