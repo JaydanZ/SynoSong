@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 import styles from "./TrackItem.module.css";
 import Image from "next/image";
 
@@ -26,6 +25,7 @@ const TrackItem: React.FC<{
             alt={props.trackName}
             width="350px"
             height="350px"
+            priority={true}
           />
         </div>
         <div className={styles.nameAndArtistsContainer}>

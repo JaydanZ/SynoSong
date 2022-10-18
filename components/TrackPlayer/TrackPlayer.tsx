@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 import styles from "./TrackPlayer.module.css";
 
@@ -114,14 +114,6 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
       );
     }
   };
-
-  // useEffect(() => {
-  //   if (duration === 0) {
-  //     onLoadedMetadata();
-  //   }
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   return (
     <div className={styles.trackPlayer}>

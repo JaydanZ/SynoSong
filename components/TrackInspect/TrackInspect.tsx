@@ -28,12 +28,12 @@ const TrackInspect: React.FC<{
   let containerRef = useRef<HTMLDivElement>(null);
 
   // Generate gradient based on album cover primary color
-  const generateGradient = () => {
-    containerRef.current!.style.setProperty(
-      "--background-clr",
-      `${props.imgPalette[0]},${props.imgPalette[1]},${props.imgPalette[2]}`
-    );
-  };
+  // const generateGradient = () => {
+  //   containerRef.current!.style.setProperty(
+  //     "--background-clr",
+  //     `${props.imgPalette[0]},${props.imgPalette[1]},${props.imgPalette[2]}`
+  //   );
+  // };
 
   const addToPlaylist = () => {
     dispatch(
@@ -93,7 +93,7 @@ const TrackInspect: React.FC<{
               alt={props.trackData.name}
               height="350px"
               width="350px"
-              onLoadingComplete={generateGradient}
+              //onLoadingComplete={generateGradient}
             />
           </div>
           <div className={styles.trackInfoContainer}>
