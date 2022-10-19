@@ -17,6 +17,8 @@ const TrackInspect: React.FC<{
   imgPalette: number[];
   artistTopTracks: SpotifyApi.TrackObjectFull[] | undefined;
 }> = (props) => {
+  console.log(props.trackData.preview_url);
+
   // Hooks
   const { isLoggedIn, session } = useCheckLogin();
 
@@ -27,13 +29,13 @@ const TrackInspect: React.FC<{
   // Refs
   let containerRef = useRef<HTMLDivElement>(null);
 
-  // Generate gradient based on album cover primary color
-  // const generateGradient = () => {
-  //   containerRef.current!.style.setProperty(
-  //     "--background-clr",
-  //     `${props.imgPalette[0]},${props.imgPalette[1]},${props.imgPalette[2]}`
-  //   );
-  // };
+  //Generate gradient based on album cover primary color
+  const generateGradient = () => {
+    containerRef.current!.style.setProperty(
+      "--background-clr",
+      `${props.imgPalette[0]},${props.imgPalette[1]},${props.imgPalette[2]}`
+    );
+  };
 
   const addToPlaylist = () => {
     dispatch(
@@ -93,6 +95,8 @@ const TrackInspect: React.FC<{
               alt={props.trackData.name}
               height="350px"
               width="350px"
+              priority={true}
+              quality={100}
               //onLoadingComplete={generateGradient}
             />
           </div>

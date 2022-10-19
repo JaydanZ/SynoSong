@@ -26,6 +26,7 @@ const TrackItem: React.FC<{
             width="350px"
             height="350px"
             priority={true}
+            quality={100}
           />
         </div>
         <div className={styles.nameAndArtistsContainer}>

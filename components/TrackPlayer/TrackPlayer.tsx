@@ -122,6 +122,7 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
         src={props.trackURL}
         preload="metadata"
         onLoadedMetadata={onLoadedMetadata}
+        data-testid="audioElement"
       ></audio>
       <button className={styles.playerPlayPause} onClick={playPauseHandler}>
         {isPlaying ? <FaPause /> : <FaPlay />}
