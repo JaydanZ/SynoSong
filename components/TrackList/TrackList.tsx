@@ -3,6 +3,7 @@ import TrackItem from "../Tracks/TrackItem";
 import styles from "./TrackList.module.css";
 
 const TrackList: React.FC<{ tracks: trackListObj | undefined }> = (props) => {
+  //console.log(props.tracks);
   return (
     <div className={styles.tracksContainer}>
       {props.tracks?.map((entry) =>
