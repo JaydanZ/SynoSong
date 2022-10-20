@@ -36,15 +36,15 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
     return `${returnedMinutes}:${returnedSeconds}`;
   };
 
-  const playPauseHandler = () => {
+  const playPauseHandler = async () => {
     const prevPlayState: boolean = isPlaying;
     setIsPlaying(!prevPlayState);
 
     if (!prevPlayState) {
-      audioPlayer.current?.play();
+      await audioPlayer.current?.play();
       animationProgress.current = requestAnimationFrame(whilePlaying);
     } else {
-      audioPlayer.current?.pause();
+      await audioPlayer.current?.pause();
       cancelAnimationFrame(animationProgress.current); //
     }
   };
@@ -93,6 +93,7 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
     setIsMuted(!prevMuteState);
 
     if (!prevMuteState) {
+      // Mute audio
       const curVolume: number = parseInt(volumeBar.current!.value) / 100;
       setCurrentVolume(curVolume);
 
@@ -103,6 +104,7 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
         `${parseInt(volumeBar.current!.value)}%`
       );
     } else {
+      // Unmute audio
       const prevVolume = currentVolume;
       audioPlayer.current!.muted = false;
       audioPlayer.current!.volume = prevVolume;
@@ -124,7 +126,11 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
         onLoadedMetadata={onLoadedMetadata}
         data-testid="audioElement"
       ></audio>
-      <button className={styles.playerPlayPause} onClick={playPauseHandler}>
+      <button
+        className={styles.playerPlayPause}
+        onClick={playPauseHandler}
+        data-testid="playPauseBtn"
+      >
         {isPlaying ? <FaPause /> : <FaPlay />}
       </button>
       <div className={styles.currentTime}>{calcTime(currentTime)}</div>
@@ -139,7 +145,11 @@ const TrackPlayer: React.FC<{ trackURL: string | undefined }> = (props) => {
         {duration !== 0 && !isNaN(duration) && calcTime(duration)}
       </div>
       <div className={styles.volumeControls}>
-        <button className={styles.playerMute} onClick={volumeMuteHandler}>
+        <button
+          className={styles.playerMute}
+          onClick={volumeMuteHandler}
+          data-testid="muteBtn"
+        >
           {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
         </button>
         <input
