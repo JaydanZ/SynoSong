@@ -90,13 +90,13 @@ const TrackInspect: React.FC<{
         <div className={styles.trackDataContainer}>
           <div className={styles.trackImageContainer}>
             <Image
-              src={props.trackData.album.images[0].url}
+              src={props.trackData.album.images[2].url}
               alt={props.trackData.name}
               height="350px"
               width="350px"
               priority={true}
               quality={100}
-              //onLoadingComplete={generateGradient}
+              onLoadingComplete={generateGradient}
             />
           </div>
           <div className={styles.trackInfoContainer}>
