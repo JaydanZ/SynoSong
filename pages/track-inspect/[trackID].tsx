@@ -99,7 +99,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const requestArtistTopTracks = async (id: string) => {
     const tracksRequestParams: songRequestType = {
       method: "GET",
-      url: `https://api.spotify.com/v1/artists/${id}/top-tracks?market=CA`,
+      url: `https://api.spotify.com/v1/artists/${id}/top-tracks?market=NA`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${spotifyToken}`,

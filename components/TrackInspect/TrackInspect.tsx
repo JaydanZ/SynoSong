@@ -17,8 +17,7 @@ const TrackInspect: React.FC<{
   imgPalette: number[];
   artistTopTracks: SpotifyApi.TrackObjectFull[] | undefined;
 }> = (props) => {
-  console.log(props.trackData.preview_url);
-
+  console.log(props.trackData);
   // Hooks
   const { isLoggedIn, session } = useCheckLogin();
 

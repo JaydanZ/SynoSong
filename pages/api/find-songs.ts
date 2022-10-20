@@ -77,7 +77,7 @@ const requestTracks = async (wordInput: string) => {
   // Get songs using synonyms from wordsAPI
   const songRequestParams: songRequestType = {
     method: "GET",
-    url: `https://api.spotify.com/v1/search?q=${wordInput}&type=track&limit=5&market=CA`,
+    url: `https://api.spotify.com/v1/search?q=${wordInput}&type=track&limit=5&market=NA`,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${spotifyToken}`,
