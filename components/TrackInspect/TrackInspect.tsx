@@ -17,6 +17,7 @@ const TrackInspect: React.FC<{
   imgPalette: number[];
   artistTopTracks: SpotifyApi.TrackObjectFull[] | undefined;
 }> = (props) => {
+  console.log(props.trackData);
   // Hooks
   const { isLoggedIn, session } = useCheckLogin();
 
@@ -89,13 +90,12 @@ const TrackInspect: React.FC<{
         <div className={styles.trackDataContainer}>
           <div className={styles.trackImageContainer}>
             <Image
-              src={props.trackData.album.images[2].url}
+              src={props.trackData.album.images[0].url}
               alt={props.trackData.name}
               height="350px"
               width="350px"
               priority={true}
               quality={100}
-              onLoadingComplete={generateGradient}
             />
           </div>
           <div className={styles.trackInfoContainer}>

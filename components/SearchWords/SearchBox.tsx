@@ -32,7 +32,7 @@ const SearchBox = () => {
         draggable: true,
         progress: undefined,
       });
-    } else if (res.tracks!.length === 0) {
+    } else if (res.tracks?.length === 0) {
       toast.error("No results found for generated word.", {
         position: "bottom-center",
         autoClose: 2000,
