@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Welcome to SynoSong
 
-## Getting Started
+<img width="2332" height="1013" alt="image" src="https://github.com/user-attachments/assets/153ce868-4684-4320-8982-991e216dd313" />
 
-First, run the development server:
+A full-stack Next.js web app that helps you discover music in a new way.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Synosong lets you explore songs from Spotify's API using synonyms of randomly generated or user-inputted words. It delivers a smooth, dynamic experience for music discovery.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Built with Next.js, React. TypeScript and Redux.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+✨ Features:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- 🔑 Secure authentication with NextAuth
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- 🎵 Fetch tracks directly from Spotify’s API
 
-## Learn More
+- 📝 Create and import custom playlists straight into your Spotify account
 
-To learn more about Next.js, take a look at the following resources:
+- 🔀 Discover music via synonym-based word matching
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Song Preview
+<img width="2339" height="1218" alt="image" src="https://github.com/user-attachments/assets/e0401471-47a5-4138-acd6-c029add3d553" />
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Created Playlists
+<img width="2374" height="926" alt="image" src="https://github.com/user-attachments/assets/9cd26ee8-440e-4b8d-9eed-b92283feacf2" />
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
