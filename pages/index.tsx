@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
-import { signIn, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import Head from "next/head";
 import { motion } from "framer-motion";
 import styles from "../styles/Home.module.css";
 import SearchBox from "../components/SearchWords/SearchBox";
@@ -13,6 +12,9 @@ const Home: NextPage = () => {
       animate={{ opacity: 1 }}
       key="home"
     >
+      <Head>
+        <title>Synosong - Home</title>
+      </Head>
       <div className={styles.homeContainer}>
         <SearchBox />
       </div>

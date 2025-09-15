@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Head from "next/head";
 import type { GetServerSideProps } from "next";
 import { getProviders, signIn } from "next-auth/react";
 import { Providers } from "../../types/next-auth-custom";
@@ -14,6 +15,9 @@ const login: NextPage<{ providers: Providers }> = ({ providers }) => {
       animate={{ opacity: 1 }}
       key="login"
     >
+      <Head>
+        <title>Synosong - Spotify Login</title>
+      </Head>
       <div className={styles.loginContainer}>
         <h1 className={styles.loginHeader}>Login</h1>
         <div className={styles.loginSubHeader}>
