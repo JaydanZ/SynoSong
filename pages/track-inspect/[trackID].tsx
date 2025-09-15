@@ -1,6 +1,7 @@
 import React from "react";
 import axios, { AxiosError } from "axios";
 import type { NextPage } from "next";
+import Head from "next/head";
 import type { GetServerSideProps, GetStaticPaths } from "next";
 import type {
   spotifyTokenType,
@@ -10,7 +11,6 @@ import type {
 import styles from "./TrackInspectPage.module.css";
 import TrackInspect from "../../components/TrackInspect/TrackInspect";
 import Vibrant from "node-vibrant";
-import { motion } from "framer-motion";
 
 const TrackInspectPage: NextPage<{
   success: boolean;
@@ -21,6 +21,11 @@ const TrackInspectPage: NextPage<{
 }> = (props) => {
   return (
     <div>
+      <Head>
+        <title>
+          Synosong - Track: {props.trackData ? props.trackData.name : "Unknown"}
+        </title>
+      </Head>
       <div className={styles.container}>
         {props.success === false && (
           <h1 className={styles.errorText}>
