@@ -10,7 +10,7 @@ type RandomWordRes = {
 export const generateWord = async () => {
   const options: randomWordRequestOptions = {
     method: "GET",
-    url: "https://random-word-form.herokuapp.com/random/noun",
+    url: "https://random-word-api.vercel.app/api?words=1",
     headers: {
       "Content-Type": "application/json",
     },
@@ -24,6 +24,7 @@ export const generateWord = async () => {
 
   try {
     const apiRes = await axios(options);
+    console.log(apiRes);
     res.word = apiRes.data[0];
   } catch (error: AxiosError | unknown) {
     if (error instanceof AxiosError) res.error = error.response?.data;
