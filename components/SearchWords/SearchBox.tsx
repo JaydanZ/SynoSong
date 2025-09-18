@@ -103,6 +103,11 @@ const SearchBox = () => {
     const tracks = await findSongs(randomWord.word!);
 
     validateApiResponse(tracks);
+
+    if (wordInputRef.current && randomWord.word) {
+      wordInputRef.current.value = randomWord.word;
+    }
+
     setLoading(false);
   };
 
