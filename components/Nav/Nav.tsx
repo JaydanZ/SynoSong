@@ -56,9 +56,15 @@ const Navbar = () => {
               My Playlist
             </h1>
           </Link>
-          <h1 className={styles.navLinks} onClick={closeNav}>
-            About
-          </h1>
+          <a
+            target="_blank"
+            href="https://github.com/JaydanZ/SynoSong"
+            rel="noopener noreferrer"
+          >
+            <h1 className={styles.navLinks} onClick={closeNav}>
+              About
+            </h1>
+          </a>
         </div>
         <div className={styles.linkDivider}></div>
         <div className={styles.authLinks}>
